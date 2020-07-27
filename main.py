@@ -1,0 +1,92 @@
+import pygame
+
+pygame.init()
+
+
+# generer la fenetre du jeu
+pygame.display.set_caption("Bomberman Homemade")
+screen = pygame.display.set_mode((1920, 1080))
+
+# importer et charger le background
+background = pygame.image.load('assets/bg.jpg')
+background = pygame.transform.scale(background, (1920, 1080))
+
+# importer la bannier
+banner = pygame.image.load('assets/bg_nav.png')
+banner = pygame.transform.scale(banner, (1920, 1080))
+
+# importer les boutons nav
+button_2 = pygame.image.load('assets/button_player_2.png')
+button_3 = pygame.image.load('assets/button_player_3.png')
+button_4 = pygame.image.load('assets/button_player_4.png')
+button_2 = pygame.transform.scale(button_2, (400, 180))
+button_3 = pygame.transform.scale(button_3, (400, 180))
+button_4 = pygame.transform.scale(button_4, (400, 180))
+
+# importer les shadows des boutons nav
+button_2_shadow = pygame.image.load('assets/button_player_shadow.png')
+button_3_shadow = pygame.image.load('assets/button_player_shadow.png')
+button_4_shadow = pygame.image.load('assets/button_player_shadow.png')
+button_2_shadow = pygame.transform.scale(button_2_shadow, (400, 180))
+button_3_shadow = pygame.transform.scale(button_3_shadow, (400, 180))
+button_4_shadow = pygame.transform.scale(button_4_shadow, (400, 180))
+
+# créer les rect des boutons
+button_2_rect = button_2.get_rect()
+button_3_rect = button_3.get_rect()
+button_4_rect = button_4.get_rect()
+
+#-----------------------------------------------
+# TO DO
+# import du son
+# sound_nav = pygame.mixer.Sound('assets/sounds/music_nav.mp3')
+#-----------------------------------------------
+
+
+running = True
+
+game_status = False
+
+# boucle tant que running est vrai
+while running:
+    
+    # appliquer le background
+    screen.blit(background, (0, 0))
+    
+    if game_status == False:
+        # appliquer la banniere
+        screen.blit(banner, (0, 0))
+        
+        # appliquer les boutons
+        screen.blit(button_2, (1400, 400))
+        screen.blit(button_3, (1400, 600))
+        screen.blit(button_4, (1400, 800))
+    
+    #-----------------------------------------------
+    # TO DO
+    # lancer le son si le nav est la
+    # if game_status == False:
+    #     sound_nav.play()
+    #-----------------------------------------------
+    
+        
+    # update le screen
+    pygame.display.flip()
+    
+    # pour chaque event qui arrive
+    for event in pygame.event.get():
+        
+        # check que l'event est le fait de fermer la fenetre
+        if event.type == pygame.QUIT:
+            running = False
+            pygame.quit()
+            print("Le jeu ce ferme")
+            
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            # verifier que la souris est appyer au bon endroit
+            if button_2_rect.collidepoint(event.pos) or button_3_rect.collidepoint(event.pos) or button_4_rect.collidepoint(event.pos):
+                # mettre le jeu en mode lander
+                game_status = True
+                print("test")
+            
+        
