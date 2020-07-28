@@ -6,6 +6,8 @@ pygame.init()
 # generer la fenetre du jeu
 pygame.display.set_caption("Bomberman Homemade")
 screen = pygame.display.set_mode((1920, 1080))
+icon_32x32 = pygame.image.load("assets/favicon.png").convert_alpha()
+pygame.display.set_icon(icon_32x32)
 
 # importer et charger le background
 background = pygame.image.load('assets/bg.jpg')
@@ -43,15 +45,11 @@ button_3_rect.y = 600
 button_4_rect.y = 800
 
 
-#-----------------------------------------------
-# TO DO
-# import du son
-# sound_nav = pygame.mixer.Sound('assets/sounds/music_nav.mp3')
-#-----------------------------------------------
-
-
+# le jeux est en cour
 running = True
+# nombre de joueur dans la parti
 nb_joueur = 0
+# une parti est en cour
 game_status = False
 
 # boucle tant que running est vrai
@@ -60,7 +58,9 @@ while running:
     # appliquer le background
     screen.blit(background, (0, 0))
     
+    # si la parti n''est pas lancé
     if game_status == False:
+        
         # appliquer la banniere
         screen.blit(banner, (0, 0))
         
@@ -68,14 +68,6 @@ while running:
         screen.blit(button_2, (1400, 400))
         screen.blit(button_3, (1400, 600))
         screen.blit(button_4, (1400, 800))
-    
-    #-----------------------------------------------
-    # TO DO
-    # lancer le son si le nav est la
-    # if game_status == False:
-    #     sound_nav.play()
-    #-----------------------------------------------
-    
         
     # update le screen
     pygame.display.flip()
@@ -90,18 +82,20 @@ while running:
             print("Le jeu ce ferme")
             
         elif event.type == pygame.MOUSEBUTTONDOWN:
+            
             # verifier que la souris est appyer au bon endroit
+            # si le click est sur un nombre de joueur
+            # je lance une game
+            # je def le nombre de joueur
+            
             if button_2_rect.collidepoint(event.pos):
-                # mettre le jeu en mode lancer et definir la variable nombre de joueur
                 game_status = True
                 nb_joueur = 2
+                
             elif button_3_rect.collidepoint(event.pos):
-                # mettre le jeu en mode lancer et definir la variable nombre de joueur
                 game_status = True
                 nb_joueur = 3
+                
             elif button_4_rect.collidepoint(event.pos):
-                # mettre le jeu en mode lancer et definir la variable nombre de joueur
                 game_status = True
                 nb_joueur = 4
-            
-        
