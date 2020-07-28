@@ -1,82 +1,94 @@
+# coding: utf-8
+
+# IMPORT
+from math import ceil
 import pygame
 
+# Code additionel
 from game import Game
+
+
+# Initialise Pygame
 pygame.init()
 
 
-# generer la fenetre du jeu
+# Générer la fenetre du jeu
 pygame.display.set_caption("Bomberman Homemade")
-screen = pygame.display.set_mode((1920, 1080))
+# Créer la surface d'affichage (En 16/9 !) (1600*900 OK) (1366*768 OK) (1280*720 OK) (1024*576 OK)
+screen = pygame.display.set_mode((1280, 720))
+# Charge la Favicon
 icon_32x32 = pygame.image.load("assets/favicon.png").convert_alpha()
+# Applique la Favicon
 pygame.display.set_icon(icon_32x32)
 
 # importer et charger le background
 background = pygame.image.load('assets/bg.jpg')
-background = pygame.transform.scale(background, (1920, 1080))
+background = pygame.transform.scale(background, screen.get_size())
 
 # importer la bannier
 banner = pygame.image.load('assets/bg_nav.png')
-banner = pygame.transform.scale(banner, (1920, 1080))
+banner = pygame.transform.scale(banner, screen.get_size())
 
 # importer les boutons nav
 button_2 = pygame.image.load('assets/button_player_2.png')
 button_3 = pygame.image.load('assets/button_player_3.png')
 button_4 = pygame.image.load('assets/button_player_4.png')
-button_2 = pygame.transform.scale(button_2, (400, 180))
-button_3 = pygame.transform.scale(button_3, (400, 180))
-button_4 = pygame.transform.scale(button_4, (400, 180))
+# Change la taille des boutons pour
+button_2 = pygame.transform.scale(button_2, (ceil(screen.get_width() / 5.5), ceil(screen.get_height() / 6)))
+button_3 = pygame.transform.scale(button_3, (ceil(screen.get_width() / 5.5), ceil(screen.get_height() / 6)))
+button_4 = pygame.transform.scale(button_4, (ceil(screen.get_width() / 5.5), ceil(screen.get_height() / 6)))
 
 # importer les shadows des boutons nav
-button_2_shadow = pygame.image.load('assets/button_player_shadow.png')
-button_3_shadow = pygame.image.load('assets/button_player_shadow.png')
-button_4_shadow = pygame.image.load('assets/button_player_shadow.png')
-button_2_shadow = pygame.transform.scale(button_2_shadow, (400, 180))
-button_3_shadow = pygame.transform.scale(button_3_shadow, (400, 180))
-button_4_shadow = pygame.transform.scale(button_4_shadow, (400, 180))
+# button_2_shadow = pygame.image.load('assets/button_player_shadow.png')
+# button_3_shadow = pygame.image.load('assets/button_player_shadow.png')
+# button_4_shadow = pygame.image.load('assets/button_player_shadow.png')
+# button_2_shadow = pygame.transform.scale(button_2_shadow, (400, 180))
+# button_3_shadow = pygame.transform.scale(button_3_shadow, (400, 180))
+# button_4_shadow = pygame.transform.scale(button_4_shadow, (400, 180))
 
 # créer les rect des boutons
 button_2_rect = button_2.get_rect()
 button_3_rect = button_3.get_rect()
 button_4_rect = button_4.get_rect()
-button_2_rect.x = 1400
-button_3_rect.x = 1400
-button_4_rect.x = 1400
-button_2_rect.y = 400
-button_3_rect.y = 600
-button_4_rect.y = 800
+button_2_rect.x = ceil(screen.get_width() / 1.4)
+button_3_rect.x = ceil(screen.get_width() / 1.4)
+button_4_rect.x = ceil(screen.get_width() / 1.4)
+button_2_rect.y = ceil(screen.get_height() / 2.8)
+button_3_rect.y = ceil(screen.get_height() / 1.76)
+button_4_rect.y = ceil(screen.get_height() / 1.3)
 
 
-# le jeux est en cour
+# le jeux est en cours
 running = True
-# nombre de joueur dans la parti
+# Nombre de joueur dans la partie
 nb_joueur = 0
-# une parti est en cour
+# Une partie est en cour
 game_status = False
 
 # boucle tant que running est vrai
 while running:
     
-    # appliquer le background
+    # Appliquer le background
     screen.blit(background, (0, 0))
     
-    # si la parti n''est pas lancé
+    # Si la partie n'est pas lancée
     if game_status == False:
         
-        # appliquer la banniere
+        # Appliquer la banniere
         screen.blit(banner, (0, 0))
         
-        # appliquer les boutons
-        screen.blit(button_2, (1400, 400))
-        screen.blit(button_3, (1400, 600))
-        screen.blit(button_4, (1400, 800))
+        # Appliquer les boutons
+        screen.blit(button_2, (ceil(screen.get_width() / 1.4), ceil(screen.get_height() / 2.8)))
+        screen.blit(button_3, (ceil(screen.get_width() / 1.4), ceil(screen.get_height() / 1.76)))
+        screen.blit(button_4, (ceil(screen.get_width() / 1.4), ceil(screen.get_height() / 1.3)))
         
-    # update le screen
+    # Update le screen
     pygame.display.flip()
     
-    # pour chaque event qui arrive
+    # Pour chaque event qui arrive
     for event in pygame.event.get():
         
-        # check que l'event est le fait de fermer la fenetre
+        # Check que l'event est le fait de fermer la fenetre
         if event.type == pygame.QUIT:
             running = False
             pygame.quit()
@@ -93,13 +105,19 @@ while running:
                 game_status = True
                 nb_joueur = 2
                 game = Game(nb_joueur)
+                # debug
+                print(nb_joueur)
                 
             elif button_3_rect.collidepoint(event.pos):
                 game_status = True
                 nb_joueur = 3
                 game = Game(nb_joueur)
+                # debug
+                print(nb_joueur)
                 
             elif button_4_rect.collidepoint(event.pos):
                 game_status = True
                 nb_joueur = 4
                 game = Game(nb_joueur)
+                # debug
+                print(nb_joueur)
