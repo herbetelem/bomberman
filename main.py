@@ -35,6 +35,13 @@ button_4_shadow = pygame.transform.scale(button_4_shadow, (400, 180))
 button_2_rect = button_2.get_rect()
 button_3_rect = button_3.get_rect()
 button_4_rect = button_4.get_rect()
+button_2_rect.x = 1400
+button_3_rect.x = 1400
+button_4_rect.x = 1400
+button_2_rect.y = 400
+button_3_rect.y = 600
+button_4_rect.y = 800
+
 
 #-----------------------------------------------
 # TO DO
@@ -44,7 +51,7 @@ button_4_rect = button_4.get_rect()
 
 
 running = True
-
+nb_joueur = 0
 game_status = False
 
 # boucle tant que running est vrai
@@ -84,9 +91,17 @@ while running:
             
         elif event.type == pygame.MOUSEBUTTONDOWN:
             # verifier que la souris est appyer au bon endroit
-            if button_2_rect.collidepoint(event.pos) or button_3_rect.collidepoint(event.pos) or button_4_rect.collidepoint(event.pos):
-                # mettre le jeu en mode lander
+            if button_2_rect.collidepoint(event.pos):
+                # mettre le jeu en mode lancer et definir la variable nombre de joueur
                 game_status = True
-                print("test")
+                nb_joueur = 2
+            elif button_3_rect.collidepoint(event.pos):
+                # mettre le jeu en mode lancer et definir la variable nombre de joueur
+                game_status = True
+                nb_joueur = 3
+            elif button_4_rect.collidepoint(event.pos):
+                # mettre le jeu en mode lancer et definir la variable nombre de joueur
+                game_status = True
+                nb_joueur = 4
             
         
