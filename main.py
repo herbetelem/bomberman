@@ -1,5 +1,6 @@
 import pygame
 
+from game import Game
 pygame.init()
 
 
@@ -91,11 +92,14 @@ while running:
             if button_2_rect.collidepoint(event.pos):
                 game_status = True
                 nb_joueur = 2
+                game = Game(nb_joueur)
                 
             elif button_3_rect.collidepoint(event.pos):
                 game_status = True
                 nb_joueur = 3
+                game = Game(nb_joueur)
                 
             elif button_4_rect.collidepoint(event.pos):
                 game_status = True
                 nb_joueur = 4
+                game = Game(nb_joueur)
