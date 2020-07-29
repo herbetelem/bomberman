@@ -77,8 +77,10 @@ class Game:
         # Créer le groupe de joueur
         self.all_players = pygame.sprite.Group()
         # Générer les joueurs
+        # position joueur
+        player_x_y = [[55, 130], [105, 130]]
         for index in range(0, nb_joueur):
-            player = Player(self)
+            player = Player(self, player_x_y[index][0], player_x_y[index][1])
             self.players.append(player)
             self.all_players.add(player)
 
