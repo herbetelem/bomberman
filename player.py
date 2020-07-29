@@ -24,22 +24,18 @@ class Player(pygame.sprite.Sprite):
     #           je suis ejecter de ma speed en arriere
     def moove(self, direction):
         if direction == "z":
-            if not self.game.check_collision(self, self.game.all_rocks):
-                self.rect.y -= self.speed
-            else:
-                self.rect.y += 5
-        elif direction == "s":
-            if not self.game.check_collision(self, self.game.all_rocks):
+            self.rect.y -= self.speed
+            if self.game.check_collision(self, self.game.all_rocks):
                 self.rect.y += self.speed
-            else:
-                self.rect.y -= 5
+        elif direction == "s":
+            self.rect.y += self.speed
+            if self.game.check_collision(self, self.game.all_rocks):
+                self.rect.y -= self.speed
         elif direction == "q":
-            if not self.game.check_collision(self, self.game.all_rocks):
-                self.rect.x -= self.speed
-            else:
-                self.rect.x += 5
-        elif direction == "d":
-            if not self.game.check_collision(self, self.game.all_rocks):
+            self.rect.x -= self.speed
+            if self.game.check_collision(self, self.game.all_rocks):
                 self.rect.x += self.speed
-            else:
-                self.rect.x -= 5
+        elif direction == "d":
+            self.rect.x += self.speed
+            if self.game.check_collision(self, self.game.all_rocks):
+                self.rect.x -= self.speed
