@@ -14,16 +14,16 @@ pygame.init()
 
 # Générer la fenetre du jeu
 pygame.display.set_caption("Bomberman Homemade")
-# Créer la surface d'affichage (En 16/9 !) (1600*900 OK) (1366*768 OK) (1280*720 OK) (1024*576 OK)
-screen = pygame.display.set_mode((1280, 720))
+# Créer la surface d'affichage (En 16/9 !) (1920*1080 OK) (1366*768 OK)
+screen = pygame.display.set_mode((1366, 768))
 # Charge la Favicon
 icon_32x32 = pygame.image.load("assets/favicon.png").convert_alpha()
 # Applique la Favicon
 pygame.display.set_icon(icon_32x32)
 
-# importer et charger le background
-background = pygame.image.load('assets/bg.jpg')
-background = pygame.transform.scale(background, screen.get_size())
+# Importer et charger le background
+# background = pygame.image.load('assets/bg.jpg')
+# background = pygame.transform.scale(background, screen.get_size())
 
 # importer la bannier
 banner = pygame.image.load('assets/bg_nav.png')
@@ -38,7 +38,7 @@ button_2 = pygame.transform.scale(button_2, (ceil(screen.get_width() / 5.5), cei
 button_3 = pygame.transform.scale(button_3, (ceil(screen.get_width() / 5.5), ceil(screen.get_height() / 6)))
 button_4 = pygame.transform.scale(button_4, (ceil(screen.get_width() / 5.5), ceil(screen.get_height() / 6)))
 
-# importer les shadows des boutons nav
+# Importer les shadows des boutons nav
 # button_2_shadow = pygame.image.load('assets/button_player_shadow.png')
 # button_3_shadow = pygame.image.load('assets/button_player_shadow.png')
 # button_4_shadow = pygame.image.load('assets/button_player_shadow.png')
@@ -46,7 +46,7 @@ button_4 = pygame.transform.scale(button_4, (ceil(screen.get_width() / 5.5), cei
 # button_3_shadow = pygame.transform.scale(button_3_shadow, (400, 180))
 # button_4_shadow = pygame.transform.scale(button_4_shadow, (400, 180))
 
-# créer les rect des boutons
+# Créer les rect des boutons
 button_2_rect = button_2.get_rect()
 button_3_rect = button_3.get_rect()
 button_4_rect = button_4.get_rect()
@@ -65,11 +65,8 @@ nb_joueur = 0
 # Une partie est en cour
 game_status = False
 
-# boucle tant que running est vrai
+# Boucle tant que running est vrai
 while running:
-    
-    # Appliquer le background
-    screen.blit(background, (0, 0))
     
     # Si la partie n'est pas lancée
     if game_status == False:
@@ -81,10 +78,11 @@ while running:
         screen.blit(button_2, (ceil(screen.get_width() / 1.4), ceil(screen.get_height() / 2.8)))
         screen.blit(button_3, (ceil(screen.get_width() / 1.4), ceil(screen.get_height() / 1.76)))
         screen.blit(button_4, (ceil(screen.get_width() / 1.4), ceil(screen.get_height() / 1.3)))
+
         
     # Update le screen
     pygame.display.flip()
-    
+
     # Pour chaque event qui arrive
     for event in pygame.event.get():
         
@@ -104,20 +102,14 @@ while running:
             if button_2_rect.collidepoint(event.pos):
                 game_status = True
                 nb_joueur = 2
-                game = Game(nb_joueur)
-                # debug
-                print(nb_joueur)
-                
             elif button_3_rect.collidepoint(event.pos):
                 game_status = True
                 nb_joueur = 3
-                game = Game(nb_joueur)
-                # debug
-                print(nb_joueur)
-                
             elif button_4_rect.collidepoint(event.pos):
                 game_status = True
                 nb_joueur = 4
-                game = Game(nb_joueur)
-                # debug
-                print(nb_joueur)
+            # Appliquer le background
+            screen.fill((56, 135, 0))
+            game = Game(nb_joueur, screen)
+            # Charge les rochers
+            game.screen_update(screen)
