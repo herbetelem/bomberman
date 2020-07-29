@@ -64,6 +64,8 @@ running = True
 nb_joueur = 0
 # Une partie est en cour
 game_status = False
+# la musique est lancé
+music_playing = False
 
 # Boucle tant que running est vrai
 while running:
@@ -79,8 +81,16 @@ while running:
         screen.blit(button_3, (ceil(screen.get_width() / 1.4), ceil(screen.get_height() / 1.76)))
         screen.blit(button_4, (ceil(screen.get_width() / 1.4), ceil(screen.get_height() / 1.3)))
 
+        if music_playing == False:
+            pygame.mixer.init()
+            pygame.mixer.music.load("assets/sounds/music.mp3")
+            pygame.mixer.music.play()
+            music_playing = True
     # si la parti est lancée
     elif game_status:
+        if music_playing:
+            pygame.mixer.music.stop()
+            music_playing = False
         game.update(screen)
         
     # Update le screen
