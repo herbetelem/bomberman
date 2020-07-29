@@ -64,8 +64,9 @@ class Game:
         for rock in self.rock_list:
             x = 0
             for can_break in rock:
-                self.rock_tile = Rock(can_break, x, y)
-                self.all_rocks.add(self.rock_tile)
+                if can_break != None:
+                    self.rock_tile = Rock(can_break, x, y)
+                    self.all_rocks.add(self.rock_tile)
                 x += 50
             y += 50
 

@@ -14,9 +14,7 @@ class Rock(pygame.sprite.Sprite):
         # Le rocher est-il destructible ?
         self.can_break = can_break
         # Load l'image en fonction de can_break
-        if can_break == None:
-            self.image = pygame.image.load("assets/map/no_rock.png")
-        elif can_break:
+        if can_break:
             # Load le sprite du rocher cassable
             self.image = pygame.image.load("assets/map/rock_weak.png")
         else:
