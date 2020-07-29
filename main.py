@@ -108,8 +108,10 @@ while running:
             elif button_4_rect.collidepoint(event.pos):
                 game_status = True
                 nb_joueur = 4
-            # Appliquer le background
-            screen.fill((56, 135, 0))
-            game = Game(nb_joueur, screen)
-            # Charge les rochers
-            game.screen_update(screen)
+            # appliquer le backrgound et créer la game a chaque lancement de parti
+            if button_2_rect.collidepoint(event.pos) or button_3_rect.collidepoint(event.pos) or button_4_rect.collidepoint(event.pos):
+                # Appliquer le background
+                screen.fill((56, 135, 0))
+                game = Game(nb_joueur, screen)
+                # Charge les rochers
+                game.screen_update(screen)
