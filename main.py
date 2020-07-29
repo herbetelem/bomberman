@@ -15,7 +15,7 @@ pygame.init()
 # Générer la fenetre du jeu
 pygame.display.set_caption("Bomberman Homemade")
 # Créer la surface d'affichage (En 16/9 !) (1920*1080 OK) (1366*768 OK)
-screen = pygame.display.set_mode((1366, 768))
+screen = pygame.display.set_mode((1350, 725))
 # Charge la Favicon
 icon_32x32 = pygame.image.load("assets/favicon.png").convert_alpha()
 # Applique la Favicon
