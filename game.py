@@ -6,7 +6,7 @@ import json
 
 # Code additionnel
 from rock import Rock
-from rock import Grass
+from grass import Grass
 from player import Player
 
 # créer la classe game qui vas gerer les parties
