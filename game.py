@@ -2,6 +2,7 @@
 
 # IMPORTS
 import pygame
+import json
 
 # Code additionnel
 from rock import Rock
@@ -15,47 +16,21 @@ class Game:
         self.is_playing = False
         # MAP #
         # Liste des rochers
-        self.rock_list = [
-                        # Ligne 1
-                        #   1     2      3      4      5      6      7      8      9      10     11     12     13     14     15     16     17     18     19     20     21     22     23     24     25     26     27
-                        [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False],
-                        # Ligne 2
-                        #   1     2     3    4      5     6     7     8     9    10    11    12    13    14    15    16    17    18    19    20    21    22    23    24    25    26    27
-                        [False, None, None, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, False],
-                        # Ligne 3
-                        #   1     2     3    4      5     6     7     8     9    10    11    12    13    14    15    16    17    18    19    20    21    22    23    24    25    26    27
-                        [False, None, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False],
-                        # Ligne 4
-                        #   1     2     3    4      5     6     7     8     9    10    11    12    13    14    15    16    17    18    19    20    21    22    23    24    25    26    27
-                        [False, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, False],
-                        # Ligne 5
-                        #   1     2     3    4      5     6     7     8     9    10    11    12    13    14    15    16    17    18    19    20    21    22    23    24    25    26    27
-                        [False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False],
-                        # Ligne 6
-                        #   1     2     3    4      5     6     7     8     9    10    11    12    13    14    15    16    17    18    19    20    21    22    23    24    25    26    27
-                        [False, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, False],
-                        # Ligne 7
-                        #   1     2     3    4      5     6     7     8     9    10    11    12    13    14    15    16    17    18    19    20    21    22    23    24    25    26    27
-                        [False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False],
-                        # Ligne 8
-                        #   1     2     3    4      5     6     7     8     9    10    11    12    13    14    15    16    17    18    19    20    21    22    23    24    25    26    27
-                        [False, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, False],
-                        # Ligne 9
-                        #   1     2     3    4      5     6     7     8     9    10    11    12    13    14    15    16    17    18    19    20    21    22    23    24    25    26    27
-                        [False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False],
-                        # Ligne 10
-                        #   1     2     3    4      5     6     7     8     9    10    11    12    13    14    15    16    17    18    19    20    21    22    23    24    25    26    27
-                        [False, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, False],
-                        # Ligne 11
-                        #   1     2     3    4      5     6     7     8     9    10    11    12    13    14    15    16    17    18    19    20    21    22    23    24    25    26    27
-                        [False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, None, False],
-                        # Ligne 12
-                        #   1     2     3    4      5     6     7     8     9    10    11    12    13    14    15    16    17    18    19    20    21    22    23    24    25    26    27
-                        [False, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, None, None, False],
-                        # Ligne 13
-                        #   1     2     3    4      5     6     7     8     9    10    11    12    13    14    15    16    17    18    19    20    21    22    23    24    25    26    27
-                        [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False],    
-        ]
+        self.rock_list = []
+        # Charge la map en fonction du nombre de joueurs
+        if nb_joueur == 2:
+            # Map pour 2 joueurs
+            with open("assets/map/2_players_map.json", "r") as load:
+                self. rock_list = json.loads(load.read())
+        elif nb_joueur == 3:
+            # Map pour 3 joueurs
+            with open("assets/map/3_players_map.json", "r") as load:
+                self. rock_list = json.loads(load.read())
+        elif nb_joueur == 4:
+            # Map pour 4 joueurs
+            with open("assets/map/4_players_map.json", "r") as load:
+                self. rock_list = json.loads(load.read())
+
         # Créer le groupe de sprites
         self.all_rocks = pygame.sprite.Group()
         # Créer les blocs en parcourant la liste
