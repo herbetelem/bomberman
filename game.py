@@ -5,6 +5,7 @@ import pygame
 
 # Code additionnel
 from rock import Rock
+from player import Player
 
 # créer la classe game qui vas gerer les parties
 class Game:
@@ -77,11 +78,14 @@ class Game:
         self.all_players = pygame.sprite.Group()
         # Générer les joueurs
         for index in range(0, nb_joueur):
-            # player = Player(self)
-            # self.players.append(player)
-            # self.all_players.add(self.player)
-            pass
+            player = Player(self)
+            self.players.append(player)
+            self.all_players.add(player)
 
-    def screen_update(self, screen):
+    def update(self, screen):
+        # update rock
         for rock in self.all_rocks:
             screen.blit(rock.image, rock.rect)
+        # update les joueurs
+        for player in self.players:
+            screen.blit(player.image, player.rect)

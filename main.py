@@ -79,6 +79,9 @@ while running:
         screen.blit(button_3, (ceil(screen.get_width() / 1.4), ceil(screen.get_height() / 1.76)))
         screen.blit(button_4, (ceil(screen.get_width() / 1.4), ceil(screen.get_height() / 1.3)))
 
+    # si la parti est lancée
+    elif game_status:
+        game.update(screen)
         
     # Update le screen
     pygame.display.flip()
@@ -115,4 +118,4 @@ while running:
                 screen.fill((56, 135, 0))
                 game = Game(nb_joueur, screen)
                 # Charge les rochers
-                game.screen_update(screen)
+                game.update(screen)
