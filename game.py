@@ -10,12 +10,10 @@ from player import Player
 # créer la classe game qui vas gerer les parties
 class Game:
     
-    def __init__(self, nb_joueur, screen):
+    def __init__(self, nb_joueur):
         # definir si le jeu a commencer ou pas
         self.is_playing = False
         # MAP #
-        # Charge la map
-
         # Liste des rochers
         self.rock_list = [
                         # Ligne 1
@@ -23,10 +21,10 @@ class Game:
                         [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False],
                         # Ligne 2
                         #   1     2     3    4      5     6     7     8     9    10    11    12    13    14    15    16    17    18    19    20    21    22    23    24    25    26    27
-                        [False, None, None, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, None, None, False],
+                        [False, None, None, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, False],
                         # Ligne 3
                         #   1     2     3    4      5     6     7     8     9    10    11    12    13    14    15    16    17    18    19    20    21    22    23    24    25    26    27
-                        [False, None, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, None, False],
+                        [False, None, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False],
                         # Ligne 4
                         #   1     2     3    4      5     6     7     8     9    10    11    12    13    14    15    16    17    18    19    20    21    22    23    24    25    26    27
                         [False, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, False],
@@ -50,10 +48,10 @@ class Game:
                         [False, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, False],
                         # Ligne 11
                         #   1     2     3    4      5     6     7     8     9    10    11    12    13    14    15    16    17    18    19    20    21    22    23    24    25    26    27
-                        [False, None, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, None, False],
+                        [False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, None, False],
                         # Ligne 12
                         #   1     2     3    4      5     6     7     8     9    10    11    12    13    14    15    16    17    18    19    20    21    22    23    24    25    26    27
-                        [False, None, None, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, None, None, False],
+                        [False, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, None, None, False],
                         # Ligne 13
                         #   1     2     3    4      5     6     7     8     9    10    11    12    13    14    15    16    17    18    19    20    21    22    23    24    25    26    27
                         [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False],    
@@ -78,13 +76,16 @@ class Game:
         self.all_players = pygame.sprite.Group()
         # Générer les joueurs
         # position joueur
-        player_x_y = [[55, 130], [105, 130]]
+        player_x_y = [[55, 130], [1255, 630]]
         for index in range(0, nb_joueur):
             player = Player(self, player_x_y[index][0], player_x_y[index][1])
             self.players.append(player)
             self.all_players.add(player)
 
     def update(self, screen):
+        """
+            Update la position des rochers et des joueurs sur la carte
+        """
         # update rock
         for rock in self.all_rocks:
             screen.blit(rock.image, rock.rect)

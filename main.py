@@ -116,6 +116,6 @@ while running:
             if button_2_rect.collidepoint(event.pos) or button_3_rect.collidepoint(event.pos) or button_4_rect.collidepoint(event.pos):
                 # Appliquer le background
                 screen.fill((56, 135, 0))
-                game = Game(nb_joueur, screen)
+                game = Game(nb_joueur)
                 # Charge les rochers
                 game.update(screen)
