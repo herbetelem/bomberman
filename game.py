@@ -57,6 +57,9 @@ class Game:
             player = Player(self, player_x_y[index][0], player_x_y[index][1])
             self.players.append(player)
             self.all_players.add(player)
+            
+        # créer la librairie de touche
+        self.pressed = {}
 
     def update(self, screen):
         """
@@ -68,3 +71,38 @@ class Game:
         # update les joueurs
         for player in self.players:
             screen.blit(player.image, player.rect)
+
+        # check ver la ou le joueur 1 veu aller
+        # IMPORTANT #
+        # pygame prend les touches en qwerty donc w->z a->q
+        if self.pressed.get(pygame.K_w):
+            if (self.players[0].rect.y) > 130:
+                self.players[0].moove("z")
+        elif self.pressed.get(pygame.K_a):
+            if (self.players[0].rect.x) > 50:
+                self.players[0].moove("q")
+        elif self.pressed.get(pygame.K_s):
+            if (self.players[0].rect.y + self.players[0].rect.width) < (screen.get_height() - 50):
+                self.players[0].moove("s")
+        elif self.pressed.get(pygame.K_d):
+            if (self.players[0].rect.x + self.players[0].rect.width) < (screen.get_width() - 50):
+                self.players[0].moove("d")
+
+        # check ver la ou le joueur 2 veu aller
+        # IMPORTANT #
+        # pygame prend les touches en qwerty donc w->z a->q
+        if self.pressed.get(pygame.K_i):
+            if (self.players[1].rect.y) > 130:
+                self.players[1].moove("z")
+        elif self.pressed.get(pygame.K_j):
+            if (self.players[1].rect.x) > 50:
+                self.players[1].moove("q")
+        elif self.pressed.get(pygame.K_k):
+            if (self.players[1].rect.y + self.players[0].rect.width) < (screen.get_height() - 50):
+                self.players[1].moove("s")
+        elif self.pressed.get(pygame.K_l):
+            if (self.players[1].rect.x + self.players[0].rect.width) < (screen.get_width() - 50):
+                self.players[1].moove("d")
+    
+    def check_collision(self, sprite, group):
+        return pygame.sprite.spritecollide(sprite, group, False, pygame.sprite.collide_mask)

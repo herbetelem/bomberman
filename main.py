@@ -119,3 +119,11 @@ while running:
                 game = Game(nb_joueur)
                 # Charge les rochers
                 game.update(screen)
+
+        # detecter si un joueur appuie sur une touche
+        elif event.type == pygame.KEYDOWN:
+            game.pressed[event.key] = True
+    
+        # detecter si un joueur lache une touche
+        elif event.type == pygame.KEYUP:
+            game.pressed[event.key] = False
