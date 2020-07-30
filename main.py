@@ -94,6 +94,7 @@ while running:
             pygame.mixer.init()
             pygame.mixer.music.load("assets/sounds/nav.mp3")
             pygame.mixer.music.play()
+            pygame.mixer.music.set_volume(0.01)
             music_nav = True
     # si la parti est lancée
     elif game_status:
@@ -103,6 +104,7 @@ while running:
             music_nav = False
             pygame.mixer.music.load("assets/sounds/game.mp3")
             pygame.mixer.music.play()
+            pygame.mixer.music.set_volume(0.01)
         
         # Refresh l'affichage
         game.update(screen)
