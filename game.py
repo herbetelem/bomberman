@@ -97,6 +97,19 @@ class Game:
         for player in self.players:
             for bomb in player.all_bombs:
                 screen.blit(bomb.image, bomb.rect)
+                # recuperer les projectiles du joeur
+                for projectiles in bomb.all_projectiles_top:
+                    projectiles.move_top()
+                    screen.blit(projectiles.image, projectiles.rect)
+                for projectiles in bomb.all_projectiles_bot:
+                    projectiles.move_bot()
+                    screen.blit(projectiles.image, projectiles.rect)
+                for projectiles in bomb.all_projectiles_left:
+                    projectiles.move_left()
+                    screen.blit(projectiles.image, projectiles.rect)
+                for projectiles in bomb.all_projectiles_right:
+                    projectiles.move_right()
+                    screen.blit(projectiles.image, projectiles.rect)
         # update les joueurs
         for player in self.players:
             screen.blit(player.image, player.rect)

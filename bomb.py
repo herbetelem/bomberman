@@ -2,6 +2,7 @@
 
 # IMPORTS
 import pygame
+from projectile import Projectile
 
 # Code additionnel
 from toolbox import set_timeout
@@ -23,6 +24,11 @@ class Bomb(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = player.rect.x
         self.rect.y = player.rect.y
+        # Créer les groups de projectiles
+        self.all_projectiles_top = pygame.sprite.Group()
+        self.all_projectiles_bot = pygame.sprite.Group()
+        self.all_projectiles_left = pygame.sprite.Group()
+        self.all_projectiles_right = pygame.sprite.Group()
         
         
     def hot_1(self):
@@ -44,7 +50,12 @@ class Bomb(pygame.sprite.Sprite):
         # Change l'image de la bombe
         self.image = pygame.image.load("assets/boom.png")
         # La bombe se supprime aprés 0.5sec
-        set_timeout(self.remove, 0.5)
+        set_timeout(self.remove, 2)
+        # créer les 4 flammes
+        self.all_projectiles_top.add(Projectile(self, "assets/projectile.png"))
+        self.all_projectiles_bot.add(Projectile(self, "assets/projectile.png"))
+        self.all_projectiles_left.add(Projectile(self, "assets/projectile.png"))
+        self.all_projectiles_right.add(Projectile(self, "assets/projectile.png"))
 
 
     def remove(self):
