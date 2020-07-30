@@ -12,8 +12,7 @@ from game import Game
 pygame.init()
 # Initialise Font
 pygame.font.init()
-# Choisis la police d'écriture
-game_font = pygame.font.SysFont('Bahnschrift', 30)
+
 
 # Générer la fenetre du jeu
 pygame.display.set_caption("Bomberman Homemade")
@@ -72,8 +71,7 @@ music_nav = False
 # la musique game est lancé
 music_game = False
 
-# La limite de temps est de 2 minutes (en ms)
-timer = 120000
+
 
 # Boucle tant que running est vrai
 while running:
@@ -96,12 +94,6 @@ while running:
             music_nav = True
     # si la parti est lancée
     elif game_status:
-        # Enléve le temps passé au temps restant
-        timer -= clock.tick(60)
-        # Créer l'objet de texte
-        timer_text = game_font.render(str(timer), True, (255, 255, 255))
-        # Affiche le texte
-        screen.blit(timer_text, (screen.get_width() / 2.2, 25))
         # Stoper la musique du nav
         if music_nav:
             pygame.mixer.music.stop()
@@ -149,8 +141,6 @@ while running:
                 game = Game(nb_joueur)
                 # Charge les rochers
                 game.update(screen)
-                # Initialise l'horloge
-                clock = pygame.time.Clock()
 
         if game_status:
             # detecter si un joueur appuie sur une touche

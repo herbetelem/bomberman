@@ -65,6 +65,14 @@ class Game:
             self.players.append(player)
             self.all_players.add(player)
             
+        # TIMER #
+        # initialiser le timer
+        self.clock = pygame.time.Clock() 
+        # La limite de temps est de 2 minutes (en ms)
+        self.timer = 120000  
+        # Choisis la police d'écriture
+        self.game_font = pygame.font.SysFont('Bahnschrift', 30)
+        
         # créer la librairie de touche
         self.pressed = {}
 
@@ -73,6 +81,12 @@ class Game:
         """
             Update la position des rochers et des joueurs sur la carte
         """
+        
+        # Section timer
+        # Enléve le temps passé au temps restant
+        self.timer -= self.clock.tick(60)
+        # Créer l'objet de texte
+        timer_text = self.game_font.render(str(round(self.timer / 1000)), True, (255, 255, 255))
         # update rock
         for rock in self.all_rocks:
             screen.blit(rock.image, rock.rect)
@@ -88,6 +102,8 @@ class Game:
             screen.blit(player.image, player.rect)
         # update la banniere
         screen.blit(self.banner.image, self.banner.rect)
+        # Affiche le texte
+        screen.blit(timer_text, (screen.get_width() / 2.05, 19))
 
         # check ver la ou le joueur 1 veu aller
         # IMPORTANT #
