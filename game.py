@@ -7,6 +7,7 @@ import json
 # Code additionnel
 from rock import Rock
 from grass import Grass
+from banner import Banner
 from player import Player
 
 # créer la classe game qui vas gerer les parties
@@ -35,6 +36,7 @@ class Game:
         # Créer le groupe de sprites
         self.all_rocks = pygame.sprite.Group()
         self.all_grass = pygame.sprite.Group()
+        self.banner = Banner()
         # Créer les blocs en parcourant la liste
         y = 75
         for rock in self.rock_list:
@@ -84,6 +86,8 @@ class Game:
         # update les joueurs
         for player in self.players:
             screen.blit(player.image, player.rect)
+        # update la banniere
+        screen.blit(self.banner.image, self.banner.rect)
 
         # check ver la ou le joueur 1 veu aller
         # IMPORTANT #
