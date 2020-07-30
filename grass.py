@@ -11,7 +11,7 @@ class Grass(pygame.sprite.Sprite):
     def __init__(self, x, y):
         # Sprite class init
         super().__init__()
-        # Load le sprite du rocher incassable
+        # Load le sprite de l'herbe
         self.image = pygame.image.load("assets/map/no_rock.png")
         # Créer le rect
         self.rect = self.image.get_rect()

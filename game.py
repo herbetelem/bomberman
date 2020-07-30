@@ -66,6 +66,7 @@ class Game:
         # créer la librairie de touche
         self.pressed = {}
 
+
     def update(self, screen):
         """
             Update la position des rochers et des joueurs sur la carte
@@ -76,6 +77,10 @@ class Game:
         # update grass
         for grass in self.all_grass:
             screen.blit(grass.image, grass.rect)
+        # Update les bombes
+        for player in self.players:
+            for bomb in player.all_bombs:
+                screen.blit(bomb.image, bomb.rect)
         # update les joueurs
         for player in self.players:
             screen.blit(player.image, player.rect)
@@ -95,6 +100,10 @@ class Game:
         elif self.pressed.get(pygame.K_d):
             if (self.players[0].rect.x + self.players[0].rect.width) < (screen.get_width() - 50):
                 self.players[0].moove("d")
+
+        #    INPUT DEBUG    #
+        # print(self.pressed)
+        #-------------------#
 
         # check ver la ou le joueur 2 veu aller
         # IMPORTANT #

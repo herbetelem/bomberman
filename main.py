@@ -10,7 +10,10 @@ from game import Game
 
 # Initialise Pygame
 pygame.init()
-
+# Initialise Font
+pygame.font.init()
+# Choisis la police d'écriture
+game_font = pygame.font.SysFont('Bahnschrift', 30)
 
 # Générer la fenetre du jeu
 pygame.display.set_caption("Bomberman Homemade")
@@ -69,12 +72,15 @@ music_nav = False
 # la musique game est lancé
 music_game = False
 
+# La limite de temps est de 2 minutes (en ms)
+timer = 120000
+
 # Boucle tant que running est vrai
 while running:
     
     # Si la partie n'est pas lancée
     if game_status == False:
-        
+
         # Appliquer la banniere
         screen.blit(banner, (0, 0))
         
@@ -90,13 +96,20 @@ while running:
             music_nav = True
     # si la parti est lancée
     elif game_status:
+        # Enléve le temps passé au temps restant
+        timer -= clock.tick(60)
+        # Créer l'objet de texte
+        timer_text = game_font.render("Timer : " + str(timer), True, (0, 0, 0))
+        # Affiche le texte
+        screen.blit(timer_text, (screen.get_width() / 2.2, 25))
         # Stoper la musique du nav
         if music_nav:
             pygame.mixer.music.stop()
             music_nav = False
             pygame.mixer.music.load("assets/sounds/game.mp3")
             pygame.mixer.music.play()
-            
+        
+        # Refresh l'affichage
         game.update(screen)
         
     # Update le screen
@@ -132,14 +145,28 @@ while running:
             if button_2_rect.collidepoint(event.pos) or button_3_rect.collidepoint(event.pos) or button_4_rect.collidepoint(event.pos):
                 # Appliquer le background
                 screen.fill((56, 135, 0))
+                # Lance la partie avec le nombre de joueurs choisis
                 game = Game(nb_joueur)
                 # Charge les rochers
                 game.update(screen)
+                # Initialise l'horloge
+                clock = pygame.time.Clock()
 
-        # detecter si un joueur appuie sur une touche
-        elif event.type == pygame.KEYDOWN:
-            game.pressed[event.key] = True
-    
-        # detecter si un joueur lache une touche
-        elif event.type == pygame.KEYUP:
-            game.pressed[event.key] = False
+        if game_status:
+            # detecter si un joueur appuie sur une touche
+            if event.type == pygame.KEYDOWN:
+                # Joueur 1
+                if event.key == pygame.K_q:
+                    # Le joueur 1 appuis sur A => Pose une bombe
+                    game.players[0].drop_bomb()
+                # Joueur 2
+                elif event.key == pygame.K_u:
+                    # Le joueur 2 appuis sur U => Pose une bombe
+                    game.players[1].drop_bomb()
+                else:
+                    # Autres touches
+                    game.pressed[event.key] = True
+        
+            # detecter si un joueur lache une touche
+            elif event.type == pygame.KEYUP:
+                game.pressed[event.key] = False
