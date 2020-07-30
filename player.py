@@ -52,9 +52,9 @@ class Player(pygame.sprite.Sprite):
         if len(self.all_bombs) < 3:
             # Si le joueur n'a pas posé 3 bombes
             # Pose une bombe
-            self.all_bombs.add(Bomb(self))
-        
-
-        # DEBUG #
-        # print(self.all_bombs)
-        # print(len(self.all_bombs))
+            bomb = Bomb(self)
+            if not self.game.check_collision(bomb, self.all_bombs):
+                self.all_bombs.add(bomb)
+            else:
+                del bomb
+                

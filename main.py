@@ -41,12 +41,12 @@ button_3 = pygame.transform.scale(button_3, (ceil(screen.get_width() / 5.5), cei
 button_4 = pygame.transform.scale(button_4, (ceil(screen.get_width() / 5.5), ceil(screen.get_height() / 6)))
 
 # Importer les shadows des boutons nav
-# button_2_shadow = pygame.image.load('assets/button_player_shadow.png')
-# button_3_shadow = pygame.image.load('assets/button_player_shadow.png')
-# button_4_shadow = pygame.image.load('assets/button_player_shadow.png')
-# button_2_shadow = pygame.transform.scale(button_2_shadow, (400, 180))
-# button_3_shadow = pygame.transform.scale(button_3_shadow, (400, 180))
-# button_4_shadow = pygame.transform.scale(button_4_shadow, (400, 180))
+button_2_shadow = pygame.image.load('assets/button_player_shadow.png')
+button_3_shadow = pygame.image.load('assets/button_player_shadow.png')
+button_4_shadow = pygame.image.load('assets/button_player_shadow.png')
+button_2_shadow = pygame.transform.scale(button_2_shadow, (ceil(screen.get_width() / 5.5), ceil(screen.get_height() / 6)))
+button_3_shadow = pygame.transform.scale(button_3_shadow, (ceil(screen.get_width() / 5.5), ceil(screen.get_height() / 6)))
+button_4_shadow = pygame.transform.scale(button_4_shadow, (ceil(screen.get_width() / 5.5), ceil(screen.get_height() / 6)))
 
 # Créer les rect des boutons
 button_2_rect = button_2.get_rect()
@@ -72,7 +72,6 @@ music_nav = False
 music_game = False
 
 
-
 # Boucle tant que running est vrai
 while running:
     
@@ -82,6 +81,10 @@ while running:
         # Appliquer la banniere
         screen.blit(banner, (0, 0))
         
+        # Appliquer les ombres des boutons
+        screen.blit(button_2_shadow, (ceil(screen.get_width() / 1.4 - 5), ceil(screen.get_height() / 2.8 + 5)))
+        screen.blit(button_3_shadow, (ceil(screen.get_width() / 1.4 - 5), ceil(screen.get_height() / 1.76 + 5)))
+        screen.blit(button_4_shadow, (ceil(screen.get_width() / 1.4 - 5), ceil(screen.get_height() / 1.3 + 5)))
         # Appliquer les boutons
         screen.blit(button_2, (ceil(screen.get_width() / 1.4), ceil(screen.get_height() / 2.8)))
         screen.blit(button_3, (ceil(screen.get_width() / 1.4), ceil(screen.get_height() / 1.76)))
