@@ -99,7 +99,7 @@ while running:
         # Enléve le temps passé au temps restant
         timer -= clock.tick(60)
         # Créer l'objet de texte
-        timer_text = game_font.render("Timer : " + str(timer), True, (0, 0, 0))
+        timer_text = game_font.render(str(timer), True, (255, 255, 255))
         # Affiche le texte
         screen.blit(timer_text, (screen.get_width() / 2.2, 25))
         # Stoper la musique du nav
