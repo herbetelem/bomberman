@@ -74,7 +74,7 @@ class Game:
         # initialiser le timer
         self.clock = pygame.time.Clock() 
         # La limite de temps est de 2 minutes (en ms)
-        self.timer = 600000
+        self.timer = 5000
         # Choisis la police d'écriture
         self.game_font = pygame.font.SysFont('Bahnschrift', 30)
         

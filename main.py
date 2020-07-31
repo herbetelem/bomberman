@@ -23,9 +23,9 @@ icon_32x32 = pygame.image.load("assets/favicon.png").convert_alpha()
 # Applique la Favicon
 pygame.display.set_icon(icon_32x32)
 
-# Importer et charger le background
-# background = pygame.image.load('assets/bg.jpg')
-# background = pygame.transform.scale(background, screen.get_size())
+# Choisis la police d'écriture
+font = pygame.font.SysFont('Bahnschrift', 30)
+replay_text = font.render("Replay", True, (255, 255, 255))
 
 # importer la bannier
 banner = pygame.image.load('assets/bg_nav.png')
@@ -70,13 +70,22 @@ game_status = False
 music_nav = False
 # la musique game est lancé
 music_game = False
+# la musique win est lancé
+music_win = False
+# la musique lost est lancé
+music_lost = False
+# Fin de partie
+end_game_win = False
+end_game_lost = False
 
+# Créer le bouton replay
+button_replay = pygame.draw.rect(screen, (74, 85, 102), (630, 645, 110, 50))
 
 # Boucle tant que running est vrai
 while running:
     
     # Si la partie n'est pas lancée
-    if game_status == False:
+    if game_status == False and not music_win and not music_lost:
 
         # Appliquer la banniere
         screen.blit(banner, (0, 0))
@@ -108,7 +117,61 @@ while running:
         
         # Refresh l'affichage
         game.update(screen)
-        
+
+        # Conditions de victoire
+        if len(game.all_players) == 1 or game.timer <= 0:
+            # Stop la musique du jeu
+            music_game = False
+            pygame.mixer.music.stop()
+            # Stop la partie
+            game_status = False
+
+            if len(game.all_players) == 1:
+                # Déclare la fin de partie
+                end_game_win = True
+            elif game.timer <= 0:
+                # Déclare la fin de partie
+                end_game_lost = True
+
+
+    if end_game_win and not music_win and not music_lost:
+        # Un seul joueur restant et la musique de victoire n'est pas lancée
+        # Lance la musique de victoire
+        music_win = True
+        pygame.mixer.music.load("assets/sounds/victory.logg")
+        pygame.mixer.music.play()
+        pygame.mixer.music.set_volume(0.05)
+        # Affiche l'écran de victoire
+        # Fond noir
+        screen.fill((0, 0, 0))
+        for player in game.players:
+            # Regarde dans la liste de joueur celui qui est vivant
+            if player.alive():
+                # Le joueur est vivant, récupére son image
+                winner = player.image
+        # Affiche l'avatar du gagnant
+        screen.blit(winner, (screen.get_width() / 2.1, screen.get_height() / 2.1))
+        # Affiche le bouton replay
+        pygame.draw.rect(screen, (74, 85, 102), (620, 645, 110, 50))
+        screen.blit(replay_text, (630, 650))
+
+    elif end_game_lost and not music_lost and not music_win:
+        # Le timer est arrivé à 0 et la musique de defaite n'est pas lancée
+        # Lance la musique de victoire
+        music_lost = True
+        pygame.mixer.music.load("assets/sounds/lost.ogg")
+        pygame.mixer.music.play()
+        pygame.mixer.music.set_volume(0.05)
+        # Fond noir
+        screen.fill((0, 0, 0))
+        # Affiche l'écran de défaite
+        game_over = pygame.image.load("assets/game_over.jpg")
+        screen.blit(game_over, (35, 0))
+        # Affiche le bouton replay
+        pygame.draw.rect(screen, (74, 85, 102), (620, 645, 110, 50))
+        screen.blit(replay_text, (630, 650))
+
+
     # Update le screen
     pygame.display.flip()
 
@@ -146,6 +209,11 @@ while running:
                 game = Game(nb_joueur)
                 # Charge les rochers
                 game.update(screen)
+            if button_replay.collidepoint(event.pos) and (end_game_lost or end_game_win):
+                end_game_win = False
+                end_game_lost = False
+                music_win = False
+                music_lost = False
 
         if game_status:
             # detecter si un joueur appuie sur une touche
