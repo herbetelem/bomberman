@@ -82,4 +82,7 @@ class Projectile(pygame.sprite.Sprite):
                 for rock in temp[rocks]:
                     # Récupére la position du rocher détruit et créer un objet herbe
                     self.bomb.player.game.all_grass.add(Grass(rock.rect.x, rock.rect.y))
+                    # son mur qui casse
+                    son = pygame.mixer.Sound("assets/sounds/break.ogg")
+                    son.play()
 

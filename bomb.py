@@ -47,6 +47,9 @@ class Bomb(pygame.sprite.Sprite):
             Fait des dégats dans quatres directions, tue les joueurs et casse les murs
         """
 
+        # son explosion
+        son = pygame.mixer.Sound("assets/sounds/boom.ogg")
+        son.play()
         # Change l'image de la bombe
         self.image = pygame.image.load("assets/boom.png")
         # La bombe se supprime aprés 0.5sec
