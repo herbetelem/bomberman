@@ -2,6 +2,7 @@
 
 # IMPORTS
 import pygame
+from grass import Grass
 
 # definir la classe du projectile du joueur
 class Projectile(pygame.sprite.Sprite):
@@ -31,22 +32,26 @@ class Projectile(pygame.sprite.Sprite):
         self.check_collision()
         
     def check_collision(self):
-        # si le projectile touche un block indesctructible
-        for bloc in self.bomb.player.game.check_collision(self, self.bomb.player.game.rocks_unbreakable):
-            self.remove()
-            self.velocity = 0
-            self.rect.x = -50
-        
-        # si le projectile touche un block desctructible
-        for bloc in self.bomb.player.game.check_collision(self, self.bomb.player.game.rocks_breakable):
-            self.remove()
-            self.velocity = 0
-            self.rect.x = -50
-            
-            # SUPRIME LA LIGNE SANS S'ARRETER
-            # del self
-            # break
-            
+        # si le projectile touche un block indesctructible, supprime juste le projectile
+        pygame.sprite.groupcollide(self.bomb.all_projectiles_top, self.bomb.player.game.rocks_unbreakable, True, False)
+        pygame.sprite.groupcollide(self.bomb.all_projectiles_bot, self.bomb.player.game.rocks_unbreakable, True, False)
+        pygame.sprite.groupcollide(self.bomb.all_projectiles_left, self.bomb.player.game.rocks_unbreakable, True, False)
+        pygame.sprite.groupcollide(self.bomb.all_projectiles_right, self.bomb.player.game.rocks_unbreakable, True, False)
+
+        # si le projectile touche un block desctructible, supprime le projectile et le rocher
+        temps = [""]*4
+        temps[0] = pygame.sprite.groupcollide(self.bomb.all_projectiles_top, self.bomb.player.game.rocks_breakable, True, True)
+        temps[1] = pygame.sprite.groupcollide(self.bomb.all_projectiles_bot, self.bomb.player.game.rocks_breakable, True, True)
+        temps[2] = pygame.sprite.groupcollide(self.bomb.all_projectiles_left, self.bomb.player.game.rocks_breakable, True, True)
+        temps[3] = pygame.sprite.groupcollide(self.bomb.all_projectiles_right, self.bomb.player.game.rocks_breakable, True, True)
+
+        # Remplace les rochers par de l'herbe
+        for temp in temps:
+            for rocks in temp:
+                for rock in temp[rocks]:
+                    # Récupére la position du rocher détruit et créer un objet herbe
+                    self.bomb.player.game.all_grass.add(Grass(rock.rect.x, rock.rect.y))
+
         # si le projectile touche une bomb
         # for player_bomb in self.bomb.player.game.players:
         #     if self.bomb.player.game.check_collision(self, player_bomb.all_bombs):

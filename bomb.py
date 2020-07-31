@@ -53,9 +53,13 @@ class Bomb(pygame.sprite.Sprite):
         set_timeout(self.remove, 2)
         # créer les 4 flammes
         self.all_projectiles_top.add(Projectile(self, "assets/projectile.png"))
+        print(self.all_projectiles_top)
         self.all_projectiles_bot.add(Projectile(self, "assets/projectile.png"))
+        print(self.all_projectiles_bot)
         self.all_projectiles_left.add(Projectile(self, "assets/projectile.png"))
+        print(self.all_projectiles_left)
         self.all_projectiles_right.add(Projectile(self, "assets/projectile.png"))
+        print(self.all_projectiles_right)
 
 
     def remove(self):
