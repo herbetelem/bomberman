@@ -55,13 +55,13 @@ class Projectile(pygame.sprite.Sprite):
                     # pygame.sprite.Sprite.kill(player)
                     player.image = player.ghost_image
                     player.is_ghost = True
-        
+
         # si le projectile touche un block indesctructible, supprime juste le projectile
         pygame.sprite.groupcollide(self.bomb.all_projectiles_top, self.bomb.player.game.rocks_unbreakable, True, False)
         pygame.sprite.groupcollide(self.bomb.all_projectiles_bot, self.bomb.player.game.rocks_unbreakable, True, False)
         pygame.sprite.groupcollide(self.bomb.all_projectiles_left, self.bomb.player.game.rocks_unbreakable, True, False)
         pygame.sprite.groupcollide(self.bomb.all_projectiles_right, self.bomb.player.game.rocks_unbreakable, True, False)
-        
+
         # # si le projectile touche une bombe
         for player in self.bomb.player.game.players:
             pygame.sprite.groupcollide(self.bomb.all_projectiles_top, player.all_bombs, True, False)

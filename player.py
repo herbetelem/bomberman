@@ -20,10 +20,22 @@ class Player(pygame.sprite.Sprite):
         self.rect.y = y
         # Créer le groupe des bombes
         self.all_bombs = pygame.sprite.Group()
+        self.nb_bombs = 0
         # est fantome
         self.is_ghost = False
         self.ghost_path = f"assets/ghost_{sprite_ghost}.png"
         self.ghost_image = pygame.image.load(self.ghost_path)
+        if sprite_ghost == 1:
+            self.status_position_list = [(15, 15), (65, 20), (105, 20), (145, 20)]
+        elif sprite_ghost == 2:
+            self.status_position_list = [(340, 15), (390, 20), (430, 20), (470, 20)]
+        try:
+            if sprite_ghost == 3:
+                self.status_position_list = [(950, 15), (910, 20), (870, 20), (830, 20)]
+            elif sprite_ghost == 4:
+                self.status_position_list = [(1295, 15), (1255, 20), (1215, 20), (1175, 20)]
+        except:
+            pass
 
     # method de delacement
     #   je verifie la direction
@@ -71,6 +83,7 @@ class Player(pygame.sprite.Sprite):
                 # Pose une bombe
                 bomb = Bomb(self)
                 if not self.game.check_collision(bomb, self.all_bombs):
+                    self.nb_bombs += 1
                     self.all_bombs.add(bomb)
                 else:
                     del bomb

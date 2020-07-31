@@ -16,6 +16,7 @@ class Game:
     def __init__(self, nb_joueur):
         # definir si le jeu a commencer ou pas
         self.is_playing = False
+        self.nb_joueur = nb_joueur
         # MAP #
         # Liste des rochers
         self.rock_list = []
@@ -121,11 +122,22 @@ class Game:
             screen.blit(player.image, player.rect)
         # update la banniere
         screen.blit(self.banner.image, self.banner.rect)
-        # Affiche le texte
+        # Affiche le timer
         screen.blit(timer_text, (screen.get_width() / 2.05, 19))
+        # Affiche les joueurs et le nombre de bombes
+        # Joueur 1
+        self.status_printer(screen, self.players[0])
+        # Joueur 2
+        self.status_printer(screen, self.players[1])
+        # Joueur 3
+        if self.nb_joueur == 3:
+            self.status_printer(screen, self.players[2])
+        # Joueur 4
+        if self.nb_joueur == 4:
+            self.status_printer(screen, self.players[2])
+            self.status_printer(screen, self.players[3])
 
-        # check ver la ou le joueur 1 veu aller
-        # IMPORTANT #
+        # check ver la ou le joueur 1 veut aller
         # pygame prend les touches en qwerty donc w->z a->q
         if self.pressed.get(pygame.K_w):
             if (self.players[0].rect.y) > 130:
@@ -140,13 +152,7 @@ class Game:
             if (self.players[0].rect.x + self.players[0].rect.width) < (screen.get_width() - 50):
                 self.players[0].moove("d")
 
-        #    INPUT DEBUG    #
-        # print(self.pressed)
-        #-------------------#
-
-        # check ver la ou le joueur 2 veu aller
-        # IMPORTANT #
-        # pygame prend les touches en qwerty donc w->z a->q
+        # check ver la ou le joueur 2 veut aller
         if self.pressed.get(pygame.K_i):
             if (self.players[1].rect.y) > 130:
                 self.players[1].moove("z")
@@ -154,11 +160,65 @@ class Game:
             if (self.players[1].rect.x) > 50:
                 self.players[1].moove("q")
         elif self.pressed.get(pygame.K_k):
-            if (self.players[1].rect.y + self.players[0].rect.width) < (screen.get_height() - 50):
+            if (self.players[1].rect.y + self.players[1].rect.width) < (screen.get_height() - 50):
                 self.players[1].moove("s")
         elif self.pressed.get(pygame.K_l):
-            if (self.players[1].rect.x + self.players[0].rect.width) < (screen.get_width() - 50):
+            if (self.players[1].rect.x + self.players[1].rect.width) < (screen.get_width() - 50):
                 self.players[1].moove("d")
+
+        # check ver la ou le joueur 3 veut aller
+        try:
+            if self.pressed.get(pygame.K_KP8):
+                if (self.players[2].rect.y) > 130:
+                    self.players[2].moove("z")
+            elif self.pressed.get(pygame.K_KP4):
+                if (self.players[2].rect.x) > 50:
+                    self.players[2].moove("q")
+            elif self.pressed.get(pygame.K_KP5):
+                if (self.players[2].rect.y + self.players[2].rect.width) < (screen.get_height() - 50):
+                    self.players[2].moove("s")
+            elif self.pressed.get(pygame.K_KP6):
+                if (self.players[2].rect.x + self.players[2].rect.width) < (screen.get_width() - 50):
+                    self.players[2].moove("d")
+        except IndexError:
+            pass
+
+        # check ver la ou le joueur 4 veut aller
+        try:
+            if self.pressed.get(pygame.K_UP):
+                if (self.players[3].rect.y) > 130:
+                    self.players[3].moove("z")
+            elif self.pressed.get(pygame.K_LEFT):
+                if (self.players[3].rect.x) > 50:
+                    self.players[3].moove("q")
+            elif self.pressed.get(pygame.K_DOWN):
+                if (self.players[3].rect.y + self.players[3].rect.width) < (screen.get_height() - 50):
+                    self.players[3].moove("s")
+            elif self.pressed.get(pygame.K_RIGHT):
+                if (self.players[3].rect.x + self.players[3].rect.width) < (screen.get_width() - 50):
+                    self.players[3].moove("d")
+        except IndexError:
+            pass
     
     def check_collision(self, sprite, group):
         return pygame.sprite.spritecollide(sprite, group, False, pygame.sprite.collide_mask)
+
+    def status_printer(self, screen, player):
+        """
+            Affiche le statut du joueur (vivant / nombres de bombes sur la map)
+        """
+        # Affiche l'avatar du joueur
+        screen.blit(player.image, player.status_position_list[0])
+        # Affiche les bombes du joueur
+        if len(player.all_bombs) == 1:
+            # Le joueur a 1 bombe sur la map
+            screen.blit(pygame.image.load("assets/bomb.png"), player.status_position_list[1])
+        elif len(player.all_bombs) == 2:
+            # Le joueur a 2 bombe sur la map
+            screen.blit(pygame.image.load("assets/bomb.png"), player.status_position_list[1])
+            screen.blit(pygame.image.load("assets/bomb.png"), player.status_position_list[2])
+        elif len(player.all_bombs) == 3:
+            # Le joueur a 3 bombe sur la map
+            screen.blit(pygame.image.load("assets/bomb.png"), player.status_position_list[1])
+            screen.blit(pygame.image.load("assets/bomb.png"), player.status_position_list[2])
+            screen.blit(pygame.image.load("assets/bomb.png"), player.status_position_list[3])
