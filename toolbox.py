@@ -11,8 +11,8 @@ def set_timeout(func, sec):
 
     t = None
     def func_wrapper():
-        func()  
+        func()
         t.cancel()
     t = threading.Timer(sec, func_wrapper)
     t.start()
-    return "Boom"
+    return
