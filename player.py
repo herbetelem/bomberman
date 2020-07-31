@@ -30,19 +30,27 @@ class Player(pygame.sprite.Sprite):
     def moove(self, direction):
         if direction == "z":
             self.rect.y -= self.speed
-            if self.game.check_collision(self, self.game.all_rocks):
+            if self.game.check_collision(self, self.game.rocks_unbreakable):
+                self.rect.y += self.speed
+            elif self.game.check_collision(self, self.game.rocks_breakable):
                 self.rect.y += self.speed
         elif direction == "s":
             self.rect.y += self.speed
-            if self.game.check_collision(self, self.game.all_rocks):
+            if self.game.check_collision(self, self.game.rocks_unbreakable):
+                self.rect.y -= self.speed
+            elif self.game.check_collision(self, self.game.rocks_breakable):
                 self.rect.y -= self.speed
         elif direction == "q":
             self.rect.x -= self.speed
-            if self.game.check_collision(self, self.game.all_rocks):
+            if self.game.check_collision(self, self.game.rocks_unbreakable):
+                self.rect.x += self.speed
+            elif self.game.check_collision(self, self.game.rocks_breakable):
                 self.rect.x += self.speed
         elif direction == "d":
             self.rect.x += self.speed
-            if self.game.check_collision(self, self.game.all_rocks):
+            if self.game.check_collision(self, self.game.rocks_breakable):
+                self.rect.x -= self.speed
+            elif self.game.check_collision(self, self.game.rocks_unbreakable):
                 self.rect.x -= self.speed
 
     def drop_bomb(self):

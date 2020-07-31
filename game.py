@@ -34,7 +34,8 @@ class Game:
                 self. rock_list = json.loads(load.read())
 
         # Créer le groupe de sprites
-        self.all_rocks = pygame.sprite.Group()
+        self.rocks_breakable = pygame.sprite.Group()
+        self.rocks_unbreakable = pygame.sprite.Group()
         self.all_grass = pygame.sprite.Group()
         self.banner = Banner()
         # Créer les blocs en parcourant la liste
@@ -44,7 +45,10 @@ class Game:
             for can_break in rock:
                 if can_break != None:
                     self.rock_tile = Rock(can_break, x, y)
-                    self.all_rocks.add(self.rock_tile)
+                    if can_break:
+                        self.rocks_breakable.add(self.rock_tile)
+                    else:
+                        self.rocks_unbreakable.add(self.rock_tile)
                 else:
                     self.grass_tile = Grass(x, y)
                     self.all_grass.add(self.grass_tile)
@@ -88,7 +92,9 @@ class Game:
         # Créer l'objet de texte
         timer_text = self.game_font.render(str(round(self.timer / 1000)), True, (255, 255, 255))
         # update rock
-        for rock in self.all_rocks:
+        for rock in self.rocks_unbreakable:
+            screen.blit(rock.image, rock.rect)
+        for rock in self.rocks_breakable:
             screen.blit(rock.image, rock.rect)
         # update grass
         for grass in self.all_grass:
