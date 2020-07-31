@@ -50,16 +50,12 @@ class Bomb(pygame.sprite.Sprite):
         # Change l'image de la bombe
         self.image = pygame.image.load("assets/boom.png")
         # La bombe se supprime aprés 0.5sec
-        set_timeout(self.remove, 2)
+        set_timeout(self.remove, 1)
         # créer les 4 flammes
-        self.all_projectiles_top.add(Projectile(self, "assets/projectile.png"))
-        print(self.all_projectiles_top)
-        self.all_projectiles_bot.add(Projectile(self, "assets/projectile.png"))
-        print(self.all_projectiles_bot)
-        self.all_projectiles_left.add(Projectile(self, "assets/projectile.png"))
-        print(self.all_projectiles_left)
-        self.all_projectiles_right.add(Projectile(self, "assets/projectile.png"))
-        print(self.all_projectiles_right)
+        self.all_projectiles_top.add(Projectile(self, "assets/projectile.png", "top"))
+        self.all_projectiles_bot.add(Projectile(self, "assets/projectile.png", "bot"))
+        self.all_projectiles_left.add(Projectile(self, "assets/projectile.png", "left"))
+        self.all_projectiles_right.add(Projectile(self, "assets/projectile.png", "right"))
 
 
     def remove(self):

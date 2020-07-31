@@ -7,14 +7,24 @@ from grass import Grass
 # definir la classe du projectile du joueur
 class Projectile(pygame.sprite.Sprite):
     
-    def __init__(self, bomb, assets):
+    def __init__(self, bomb, assets, direction):
         super().__init__()
         self.velocity = 8
         self.bomb = bomb
         self.image = pygame.image.load(assets)
         self.rect = self.image.get_rect()
-        self.rect.x = bomb.rect.x + 5
-        self.rect.y = bomb.rect.y + 5
+        if direction == "top":
+            self.rect.x = bomb.rect.x + 5
+            self.rect.y = bomb.rect.y - 30
+        elif direction == "bot":
+            self.rect.x = bomb.rect.x + 5
+            self.rect.y = bomb.rect.y + 32
+        elif direction == "left":
+            self.rect.x = bomb.rect.x - 30
+            self.rect.y = bomb.rect.y + 5
+        elif direction == "right":
+            self.rect.x = bomb.rect.x + 32
+            self.rect.y = bomb.rect.y + 5
         self.origin_image = self.image
         self.angle = 0
         
@@ -32,11 +42,32 @@ class Projectile(pygame.sprite.Sprite):
         self.check_collision()
         
     def check_collision(self):
+        # si le projectile touche un joueur
+        temps = [""] * 4
+        temps[0] = pygame.sprite.groupcollide(self.bomb.all_projectiles_top, self.bomb.player.game.all_players, True, True)
+        temps[1] = pygame.sprite.groupcollide(self.bomb.all_projectiles_bot, self.bomb.player.game.all_players, True, True)
+        temps[2] = pygame.sprite.groupcollide(self.bomb.all_projectiles_left, self.bomb.player.game.all_players, True, True)
+        temps[3] = pygame.sprite.groupcollide(self.bomb.all_projectiles_right, self.bomb.player.game.all_players, True, True)
+        
+        for temp in temps:
+            for players in temp:
+                for player in temp[players]:
+                    # pygame.sprite.Sprite.kill(player)
+                    player.image = player.ghost_image
+                    player.is_ghost = True
+        
         # si le projectile touche un block indesctructible, supprime juste le projectile
         pygame.sprite.groupcollide(self.bomb.all_projectiles_top, self.bomb.player.game.rocks_unbreakable, True, False)
         pygame.sprite.groupcollide(self.bomb.all_projectiles_bot, self.bomb.player.game.rocks_unbreakable, True, False)
         pygame.sprite.groupcollide(self.bomb.all_projectiles_left, self.bomb.player.game.rocks_unbreakable, True, False)
         pygame.sprite.groupcollide(self.bomb.all_projectiles_right, self.bomb.player.game.rocks_unbreakable, True, False)
+        
+        # # si le projectile touche une bombe
+        for player in self.bomb.player.game.players:
+            pygame.sprite.groupcollide(self.bomb.all_projectiles_top, player.all_bombs, True, False)
+            pygame.sprite.groupcollide(self.bomb.all_projectiles_bot, player.all_bombs, True, False)
+            pygame.sprite.groupcollide(self.bomb.all_projectiles_left, player.all_bombs, True, False)
+            pygame.sprite.groupcollide(self.bomb.all_projectiles_right, player.all_bombs, True, False)
 
         # si le projectile touche un block desctructible, supprime le projectile et le rocher
         temps = [""]*4
@@ -52,14 +83,3 @@ class Projectile(pygame.sprite.Sprite):
                     # Récupére la position du rocher détruit et créer un objet herbe
                     self.bomb.player.game.all_grass.add(Grass(rock.rect.x, rock.rect.y))
 
-        # si le projectile touche une bomb
-        # for player_bomb in self.bomb.player.game.players:
-        #     if self.bomb.player.game.check_collision(self, player_bomb.all_bombs):
-        #         self.remove()
-        #         self.velocity = 0
-        
-        for player in self.bomb.player.game.check_collision(self, self.bomb.player.game.players):
-                self.remove()
-                self.velocity = 0
-                self.rect.x = -50
-                print("game over")

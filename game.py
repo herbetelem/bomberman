@@ -65,7 +65,7 @@ class Game:
         #                P1            P2          P3         P4
         player_x_y = [[55, 130], [1255, 630], [1255, 130], [55, 630]]
         for index in range(0, nb_joueur):
-            player = Player(self, player_x_y[index][0], player_x_y[index][1])
+            player = Player(self, player_x_y[index][0], player_x_y[index][1], (index + 1))
             self.players.append(player)
             self.all_players.add(player)
             

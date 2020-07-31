@@ -9,7 +9,7 @@ from bomb import Bomb
 # créer la classe joueur
 class Player(pygame.sprite.Sprite):
 
-    def __init__(self, game, x, y):
+    def __init__(self, game, x, y, sprite_ghost):
         super().__init__()
         self.game = game
         self.speed = 5
@@ -20,6 +20,10 @@ class Player(pygame.sprite.Sprite):
         self.rect.y = y
         # Créer le groupe des bombes
         self.all_bombs = pygame.sprite.Group()
+        # est fantome
+        self.is_ghost = False
+        self.ghost_path = f"assets/ghost_{sprite_ghost}.png"
+        self.ghost_image = pygame.image.load(self.ghost_path)
 
     # method de delacement
     #   je verifie la direction
@@ -30,39 +34,44 @@ class Player(pygame.sprite.Sprite):
     def moove(self, direction):
         if direction == "z":
             self.rect.y -= self.speed
-            if self.game.check_collision(self, self.game.rocks_unbreakable):
-                self.rect.y += self.speed
-            elif self.game.check_collision(self, self.game.rocks_breakable):
-                self.rect.y += self.speed
+            if not self.is_ghost:
+                if self.game.check_collision(self, self.game.rocks_unbreakable):
+                    self.rect.y += self.speed
+                elif self.game.check_collision(self, self.game.rocks_breakable):
+                    self.rect.y += self.speed
         elif direction == "s":
             self.rect.y += self.speed
-            if self.game.check_collision(self, self.game.rocks_unbreakable):
-                self.rect.y -= self.speed
-            elif self.game.check_collision(self, self.game.rocks_breakable):
-                self.rect.y -= self.speed
+            if not self.is_ghost:
+                if self.game.check_collision(self, self.game.rocks_unbreakable):
+                    self.rect.y -= self.speed
+                elif self.game.check_collision(self, self.game.rocks_breakable):
+                    self.rect.y -= self.speed
         elif direction == "q":
             self.rect.x -= self.speed
-            if self.game.check_collision(self, self.game.rocks_unbreakable):
-                self.rect.x += self.speed
-            elif self.game.check_collision(self, self.game.rocks_breakable):
-                self.rect.x += self.speed
+            if not self.is_ghost:
+                if self.game.check_collision(self, self.game.rocks_unbreakable):
+                    self.rect.x += self.speed
+                elif self.game.check_collision(self, self.game.rocks_breakable):
+                    self.rect.x += self.speed
         elif direction == "d":
             self.rect.x += self.speed
-            if self.game.check_collision(self, self.game.rocks_breakable):
-                self.rect.x -= self.speed
-            elif self.game.check_collision(self, self.game.rocks_unbreakable):
-                self.rect.x -= self.speed
+            if not self.is_ghost:
+                if self.game.check_collision(self, self.game.rocks_breakable):
+                    self.rect.x -= self.speed
+                elif self.game.check_collision(self, self.game.rocks_unbreakable):
+                    self.rect.x -= self.speed
 
     def drop_bomb(self):
         """
             Laisse le joueur poser une bombe au sol (Max : 3)
         """
-        if len(self.all_bombs) < 3:
-            # Si le joueur n'a pas posé 3 bombes
-            # Pose une bombe
-            bomb = Bomb(self)
-            if not self.game.check_collision(bomb, self.all_bombs):
-                self.all_bombs.add(bomb)
-            else:
-                del bomb
+        if not self.is_ghost:
+            if len(self.all_bombs) < 3:
+                # Si le joueur n'a pas posé 3 bombes
+                # Pose une bombe
+                bomb = Bomb(self)
+                if not self.game.check_collision(bomb, self.all_bombs):
+                    self.all_bombs.add(bomb)
+                else:
+                    del bomb
                 
