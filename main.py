@@ -158,6 +158,20 @@ while running:
                 elif event.key == pygame.K_u:
                     # Le joueur 2 appuis sur U => Pose une bombe
                     game.players[1].drop_bomb()
+                # Joueur 3
+                try:
+                    if event.key == pygame.K_KP0:
+                        # Le joueur 3 appuis sur 0 (Pavé numérique) => Pose une bombe
+                        game.players[2].drop_bomb()
+                except IndexError:
+                    pass
+                # Joueur 4
+                try:
+                    if event.key == pygame.K_SPACE:
+                        # Le joueur 4 appuis sur ESPACE => Pose une bombe
+                        game.players[3].drop_bomb()
+                except IndexError:
+                    pass
                 else:
                     # Autres touches
                     game.pressed[event.key] = True

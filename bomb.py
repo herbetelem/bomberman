@@ -29,8 +29,8 @@ class Bomb(pygame.sprite.Sprite):
         self.all_projectiles_bot = pygame.sprite.Group()
         self.all_projectiles_left = pygame.sprite.Group()
         self.all_projectiles_right = pygame.sprite.Group()
-        
-        
+
+
     def hot_1(self):
         # chagement de la sprite en fonction de l'étape
         self.image = pygame.image.load("assets/bomb_hot_1.png")
@@ -64,3 +64,4 @@ class Bomb(pygame.sprite.Sprite):
         """
         # Supprime la bombe de la liste des bombes et de la carte
         self.player.all_bombs.remove(self)
+        self.player.nb_bombs -= 1
