@@ -9,11 +9,12 @@ from bomb import Bomb
 # créer la classe joueur
 class Player(pygame.sprite.Sprite):
 
-    def __init__(self, game, x, y, sprite_ghost):
+    def __init__(self, game, x, y, sprite_ghost, sprite_avatar):
         super().__init__()
         self.game = game
         self.speed = 5
-        self.image = pygame.image.load('assets/favicon.png')
+        self.avatar_path = f"assets/avatar/{sprite_avatar}.png"
+        self.image = pygame.image.load(self.avatar_path)
         self.image = pygame.transform.scale(self.image, (40, 40))
         self.rect = self.image.get_rect()
         self.rect.x = x
