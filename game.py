@@ -68,14 +68,12 @@ class Game:
         player_x_y = [[55, 130], [1255, 630], [1255, 130], [55, 630]]
         # nom des avatar possible
         list_avatar = ["alexandre", "alex", "laura", "melanie", "aurelia", "hadrien"]
-        for index in range(0, nb_joueur):
+        for index in range(0, (nb_joueur)):
             # je choisi un avatar random parmis ceux qui reste
             avatar = random.randint(0, len(list_avatar))
             player = Player(self, player_x_y[index][0], player_x_y[index][1], (index + 1), list_avatar[avatar])
             self.players.append(player)
             self.all_players.add(player)
-            # je suprime l'avatar choisi
-            list_avatar.pop(avatar)
             
         # TIMER #
         # initialiser le timer
