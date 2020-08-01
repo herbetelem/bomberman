@@ -2,6 +2,7 @@
 
 # IMPORT
 from math import ceil
+import random
 import pygame
 
 # Code additionel
@@ -136,11 +137,18 @@ while running:
 
     if end_game_win and not music_win and not music_lost:
         # Un seul joueur restant et la musique de victoire n'est pas lancée
-        # Lance la musique de victoire
         music_win = True
-        pygame.mixer.music.load("assets/sounds/victory.logg")
+        # Choisis une musique en random
+        victory_sounds = ["assets/sounds/victory.logg", "assets/sounds/victory_2.ogg"]
+        victory_sound = random.choice(victory_sounds)
+        pygame.mixer.music.load(victory_sound)
+        # Lance la musique
         pygame.mixer.music.play()
-        pygame.mixer.music.set_volume(0.05)
+        # Régle le son de la musique
+        if victory_sound == "assets/sounds/victory_2.ogg":
+            pygame.mixer.music.set_volume(0.15)
+        else:
+            pygame.mixer.music.set_volume(0.06)
         # Affiche l'écran de victoire
         # Fond noir
         screen.fill((0, 0, 0))

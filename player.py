@@ -25,14 +25,24 @@ class Player(pygame.sprite.Sprite):
         self.is_ghost = False
         self.ghost_path = f"assets/ghost_{sprite_ghost}.png"
         self.ghost_image = pygame.image.load(self.ghost_path)
+        # Utilise le numéro de joueur pour lui assigner des datas
         if sprite_ghost == 1:
+            # J1
+            # Positions de l'avatar et des bombes du statut
             self.status_position_list = [(15, 15), (65, 20), (105, 20), (145, 20)]
         elif sprite_ghost == 2:
+            # J2
+            # Positions de l'avatar et des bombes du statut
             self.status_position_list = [(340, 15), (390, 20), (430, 20), (470, 20)]
         try:
+            # Evite les erreurs quand il n'y a que 2 joueurs
             if sprite_ghost == 3:
+                # J3
+                # Positions de l'avatar et des bombes du statut
                 self.status_position_list = [(950, 15), (910, 20), (870, 20), (830, 20)]
             elif sprite_ghost == 4:
+                # J4
+                # Positions de l'avatar et des bombes du statut
                 self.status_position_list = [(1295, 15), (1255, 20), (1215, 20), (1175, 20)]
         except:
             pass

@@ -52,7 +52,7 @@ class Bomb(pygame.sprite.Sprite):
         son.play()
         # Change l'image de la bombe
         self.image = pygame.image.load("assets/boom.png")
-        # La bombe se supprime aprés 0.5sec
+        # La bombe se supprime aprés 1sec
         set_timeout(self.remove, 1)
         # créer les 4 flammes
         self.all_projectiles_top.add(Projectile(self, "assets/projectile.png", "top"))
