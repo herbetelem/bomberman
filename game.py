@@ -23,6 +23,8 @@ class Game:
         self.avatar_players = [False] * self.nb_joueur
         # definit si les player et la map on été créer
         self.avatar_set = False
+        # Choisis la police d'écriture
+        self.game_font = pygame.font.SysFont('Bahnschrift', 30)
 
         # Créer le groupe de sprites
         self.rocks_breakable = pygame.sprite.Group()
@@ -57,8 +59,6 @@ class Game:
         self.clock = pygame.time.Clock()
         # La limite de temps est de 10 minutes (en ms)
         self.timer = 600000
-        # Choisis la police d'écriture
-        self.game_font = pygame.font.SysFont('Bahnschrift', 30)
 
     # Fonction qui vas créer la map et les joueurs
     def create_player(self):
@@ -236,12 +236,20 @@ class Game:
             except IndexError:
                 pass
 
-        # Si les avatar ne sont pas set
-        else:
-            # Update le menu
-            for avatar in self.all_avatar:
-                # Affiche les avatars sur le menu
-                screen.blit(avatar.image, avatar.rect)
+    def avatar_menu_update(self, screen, i):
+        """
+            Affiche le menu d'avatar en fonction du joueur qui doit sélectionner
+        """
+        # Refresh le background
+        screen.fill((56, 135, 0))
+        # Update le menu
+        for avatar in self.all_avatar:
+            # Affiche les avatars sur le menu
+            screen.blit(avatar.image, avatar.rect)
+        # Créer le texte
+        avatar_choice_text = self.game_font.render(f"Player {i+1} choose an avatar :", True, (255, 255, 255))
+        # Affiche le texte
+        screen.blit(avatar_choice_text, (500, 0))
 
     def check_collision(self, sprite, group):
         """

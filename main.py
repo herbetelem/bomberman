@@ -230,6 +230,7 @@ while running:
                 # Game est lancé
                 if not game.avatar_set:
                     # Les avatars ne sont pas choisis
+                    # Affiche le joueur qui choisis
                     for avatar in game.all_avatar:
                         if avatar.rect.collidepoint(event.pos):
                             # Le joueur clic sur un avatar
@@ -241,6 +242,7 @@ while running:
                             game.all_players.add(game.players[i])
                             # Incrémente i
                             i += 1
+                            game.avatar_menu_update(screen, i)
                     if i == nb_joueur:
                         # i = au nombre de joueurs, tous les joueurs ont un avatar
                         # Lancement du timer et création de la map
@@ -255,6 +257,8 @@ while running:
                 game_status = True
                 # Créer les joueurs avec l'architecture de base
                 game.create_player()
+
+                game.avatar_menu_update(screen, i)
             if button_replay.collidepoint(event.pos) and (end_game_lost or end_game_win):
                 # Si le joueur clic sur le bouton replay
                 # Remet à False toutes les variables de victoires et de partie en cours
