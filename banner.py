@@ -7,7 +7,7 @@ class Banner(pygame.sprite.Sprite):
     def __init__(self, nb_joueur):
         # Sprite class init
         super().__init__()
-        # Load le sprite de l'herbe
+        # Load la sprite de la banniere
         self.path_image = f"assets/map/banner_timer_{nb_joueur}.png"
         self.image = pygame.image.load(self.path_image)
         self.image = pygame.transform.scale(self.image, (1350, 75))

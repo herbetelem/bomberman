@@ -51,19 +51,20 @@ class Player(pygame.sprite.Sprite):
         except:
             pass
 
-    # method de delacement
-    #   je verifie la direction
-    #       si il n'y a pas collision je me deplace
-    #           je me deplace de ma speed
-    #       sinon
-    #           je suis ejecter de ma speed en arriere
     def moove(self, direction):
+        #   je verifie la direction
         if direction == "z":
+        #   je deplace le bonhomme
             self.rect.y -= self.speed
+        #   je verifie que le joueur ne soit pas un ghost car "i'm afraid no ghost"
             if not self.is_ghost:
+        #       si collision avez un rocher incassable
                 if self.game.check_collision(self, self.game.rocks_unbreakable):
+        #           je revien en arriere
                     self.rect.y += self.speed
+        #       si collision avez un rocher cassable
                 elif self.game.check_collision(self, self.game.rocks_breakable):
+        #           je revien en arriere
                     self.rect.y += self.speed
         elif direction == "s":
             self.rect.y += self.speed
