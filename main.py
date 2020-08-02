@@ -29,7 +29,7 @@ font = pygame.font.SysFont('Bahnschrift', 30)
 replay_text = font.render("Replay", True, (255, 255, 255))
 
 # importer la bannier
-banner = pygame.image.load('assets/bg_nav.png')
+banner = pygame.image.load('assets/bg/bg_nav.png')
 banner = pygame.transform.scale(banner, screen.get_size())
 
 # importer les boutons nav
@@ -61,8 +61,8 @@ button_3_rect.y = ceil(screen.get_height() / 1.76)
 button_4_rect.y = ceil(screen.get_height() / 1.3)
 
 # créer les fond de victoire ou defaite
-win_bg = pygame.image.load('assets/win_bg.jpg')
-game_over_bg = pygame.image.load('assets/game_over_bg.jpg')
+win_bg = pygame.image.load('assets/bg/win_bg.jpg')
+game_over_bg = pygame.image.load('assets/bg/game_over_bg.jpg')
 # Change la taille des boutons pour
 win_bg = pygame.transform.scale(win_bg, (screen.get_width(), screen.get_height()))
 game_over_bg = pygame.transform.scale(game_over_bg, (screen.get_width(), screen.get_height()))
@@ -307,37 +307,23 @@ while running:
             elif event.type == pygame.KEYUP:
                 game.pressed[event.key] = False
                 
-            # detecter la manette
+            # detecter si le joueur utilise une gachette
             if event.type == pygame.JOYBUTTONDOWN:
                 if event.button == 4 or event.button == 5:
                     game.players[0].drop_bomb()
             
+            # detecter si le joueur utilise le pad
             if event.type == pygame.JOYHATMOTION:
                 if event.value[0] == 1:
-                    game.players[0].moove("d")
-                    game.players[0].moove("d")
-                    game.players[0].moove("d")
-                    game.players[0].moove("d")
-                    game.players[0].moove("d")
-                    game.players[0].moove("d")
+                    # on apelle 6 fois la fonction moove car sinon le joueur ce deplace trop lentement
+                    for i in range(6):
+                        game.players[0].moove("d")
                 if event.value[0] == -1:
-                    game.players[0].moove("q")
-                    game.players[0].moove("q")
-                    game.players[0].moove("q")
-                    game.players[0].moove("q")
-                    game.players[0].moove("q")
-                    game.players[0].moove("q")
+                    for i in range(6):
+                        game.players[0].moove("q")
                 if event.value[1] == -1:
-                    game.players[0].moove("s")
-                    game.players[0].moove("s")
-                    game.players[0].moove("s")
-                    game.players[0].moove("s")
-                    game.players[0].moove("s")
-                    game.players[0].moove("s")
+                    for i in range(6):
+                        game.players[0].moove("s")
                 if event.value[1] == 1:
-                    game.players[0].moove("z")
-                    game.players[0].moove("z")
-                    game.players[0].moove("z")
-                    game.players[0].moove("z")
-                    game.players[0].moove("z")
-                    game.players[0].moove("z")
+                    for i in range(6):
+                        game.players[0].moove("z")

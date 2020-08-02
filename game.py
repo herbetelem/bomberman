@@ -163,17 +163,8 @@ class Game:
             # Affiche le timer
             screen.blit(timer_text, (screen.get_width() / 2.05, 19))
             # Affiche les joueurs et le nombre de bombes
-            # Joueur 1
-            self.status_printer(screen, self.players[0])
-            # Joueur 2
-            self.status_printer(screen, self.players[1])
-            # Joueur 3
-            if self.nb_joueur == 3:
-                self.status_printer(screen, self.players[2])
-            # Joueur 4
-            if self.nb_joueur == 4:
-                self.status_printer(screen, self.players[2])
-                self.status_printer(screen, self.players[3])
+            for player in self.players:
+                self.status_printer(screen, player)
 
             # check ver la ou le joueur 1 veut aller
             # pygame prend les touches en qwerty donc w->z a->q
