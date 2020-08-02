@@ -11,6 +11,8 @@ class Avatar_menu(pygame.sprite.Sprite):
         self.path_image = f"assets/avatar/{name}.png"
         self.image = pygame.image.load(self.path_image)
         self.image = pygame.transform.scale(self.image, (100, 100))
+        self.path_image_win = f"assets/avatar/{name}_win.png"
+        self.image_win = pygame.image.load(self.path_image_win)
         # Créer le rect
         self.rect = self.image.get_rect()
         self.rect.x = x

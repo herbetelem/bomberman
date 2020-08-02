@@ -172,10 +172,9 @@ while running:
             # Regarde dans la liste de joueur celui qui est vivant
             if player.alive():
                 # Le joueur est vivant, récupére son image
-                winner = player.image
-                winner = pygame.transform.scale(winner, (70, 70))
+                winner = player.image_win
         # Affiche l'avatar du gagnant
-        screen.blit(winner, (screen.get_width() / 2.1, screen.get_height() / 3 * 2))
+        screen.blit(winner, (50, 200))
         # Affiche le bouton replay
         pygame.draw.rect(screen, (74, 85, 102), (620, 645, 110, 50))
         screen.blit(replay_text, (630, 650))
@@ -242,6 +241,8 @@ while running:
                             # Le joueur clic sur un avatar
                             # Change l'avatar du joueur sélectionné
                             game.players[i].image = avatar.image
+                            # Change l'image de l'avatar quand il win
+                            game.players[i].image_win = avatar.image_win
                             # Change la taille de l'avatar
                             game.players[i].image = pygame.transform.scale(game.players[i].image, (40, 40))
                             # Ajoute le sprite au groupe de sprites des joueurs
