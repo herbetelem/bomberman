@@ -27,7 +27,7 @@ class Player(pygame.sprite.Sprite):
         # Est fantome
         self.is_ghost = False
         # Change l'image du joueur en fantome
-        self.ghost_path = f"assets/ghost_{sprite_ghost}.png"
+        self.ghost_path = f"assets/ghost/ghost_{sprite_ghost}.png"
         self.ghost_image = pygame.image.load(self.ghost_path)
         # Utilise le numéro de joueur pour lui assigner des datas
         if sprite_ghost == 1:
