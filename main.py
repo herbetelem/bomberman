@@ -33,18 +33,18 @@ banner = pygame.image.load('assets/bg_nav.png')
 banner = pygame.transform.scale(banner, screen.get_size())
 
 # importer les boutons nav
-button_2 = pygame.image.load('assets/button_player_2.png')
-button_3 = pygame.image.load('assets/button_player_3.png')
-button_4 = pygame.image.load('assets/button_player_4.png')
+button_2 = pygame.image.load('assets/button/button_player_2.png')
+button_3 = pygame.image.load('assets/button/button_player_3.png')
+button_4 = pygame.image.load('assets/button/button_player_4.png')
 # Change la taille des boutons pour
 button_2 = pygame.transform.scale(button_2, (ceil(screen.get_width() / 5.5), ceil(screen.get_height() / 6)))
 button_3 = pygame.transform.scale(button_3, (ceil(screen.get_width() / 5.5), ceil(screen.get_height() / 6)))
 button_4 = pygame.transform.scale(button_4, (ceil(screen.get_width() / 5.5), ceil(screen.get_height() / 6)))
 
 # Importer les shadows des boutons nav
-button_2_shadow = pygame.image.load('assets/button_player_shadow.png')
-button_3_shadow = pygame.image.load('assets/button_player_shadow.png')
-button_4_shadow = pygame.image.load('assets/button_player_shadow.png')
+button_2_shadow = pygame.image.load('assets/button/button_player_shadow.png')
+button_3_shadow = pygame.image.load('assets/button/button_player_shadow.png')
+button_4_shadow = pygame.image.load('assets/button/button_player_shadow.png')
 button_2_shadow = pygame.transform.scale(button_2_shadow, (ceil(screen.get_width() / 5.5), ceil(screen.get_height() / 6)))
 button_3_shadow = pygame.transform.scale(button_3_shadow, (ceil(screen.get_width() / 5.5), ceil(screen.get_height() / 6)))
 button_4_shadow = pygame.transform.scale(button_4_shadow, (ceil(screen.get_width() / 5.5), ceil(screen.get_height() / 6)))
