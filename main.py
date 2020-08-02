@@ -79,6 +79,7 @@ music_lost = False
 end_game_win = False
 end_game_lost = False
 
+
 # Créer le bouton replay
 button_replay = pygame.draw.rect(screen, (74, 85, 102), (630, 645, 110, 50))
 
@@ -209,21 +210,41 @@ while running:
             # je def le nombre de joueur
             
             if button_2_rect.collidepoint(event.pos):
-                # game_status = True
+                # Déclare le nombre de joueurs
                 nb_joueur = 2
+                # Déclare i pour le choix d'avatar
+                i = 0
             elif button_3_rect.collidepoint(event.pos):
-                # game_status = True
+                # Déclare le nombre de joueurs
                 nb_joueur = 3
+                # Déclare i pour le choix d'avatar
+                i = 0
             elif button_4_rect.collidepoint(event.pos):
-                # game_status = True
+                # Déclare le nombre de joueurs
                 nb_joueur = 4
+                # Déclare i pour le choix d'avatar
+                i = 0
                 
             # je check que game status est ok et si oui si on click sur un avatar sa lance la game
             if game_status:
+                # Game est lancé
                 if not game.avatar_set:
+                    # Les avatars ne sont pas choisis
                     for avatar in game.all_avatar:
                         if avatar.rect.collidepoint(event.pos):
-                            game.call_map_and_player()
+                            # Le joueur clic sur un avatar
+                            # Change l'avatar du joueur sélectionné
+                            game.players[i].image = avatar.image
+                            # Change la taille de l'avatar
+                            game.players[i].image = pygame.transform.scale(game.players[i].image, (40, 40))
+                            # Ajoute le sprite au groupe de sprites des joueurs
+                            game.all_players.add(game.players[i])
+                            # Incrémente i
+                            i += 1
+                    if i == nb_joueur:
+                        # i = au nombre de joueurs, tous les joueurs ont un avatar
+                        # Lancement du timer et création de la map
+                        game.call_map_and_timer()
                 
             # appliquer le backrgound et créer la game a chaque lancement de parti
             if button_2_rect.collidepoint(event.pos) or button_3_rect.collidepoint(event.pos) or button_4_rect.collidepoint(event.pos):
@@ -232,9 +253,11 @@ while running:
                 # Lance la partie avec le nombre de joueurs choisis
                 game = Game(nb_joueur)
                 game_status = True
-                # Charge les rochers
-                game.update(screen)
+                # Créer les joueurs avec l'architecture de base
+                game.create_player()
             if button_replay.collidepoint(event.pos) and (end_game_lost or end_game_win):
+                # Si le joueur clic sur le bouton replay
+                # Remet à False toutes les variables de victoires et de partie en cours
                 end_game_win = False
                 end_game_lost = False
                 music_win = False

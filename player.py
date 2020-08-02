@@ -9,12 +9,13 @@ from bomb import Bomb
 # créer la classe joueur
 class Player(pygame.sprite.Sprite):
 
-    def __init__(self, game, x, y, sprite_ghost, sprite_avatar):
+    def __init__(self, game, x, y, sprite_ghost):
         super().__init__()
         self.game = game
+        # Vitesse du joueur
         self.speed = 5
-        self.avatar_path = f"assets/avatar/{sprite_avatar}.png"
-        self.image = pygame.image.load(self.avatar_path)
+        # Image de base du joueur
+        self.image = pygame.image.load("assets/favicon.png")
         self.image = pygame.transform.scale(self.image, (40, 40))
         self.rect = self.image.get_rect()
         self.rect.x = x
@@ -22,8 +23,9 @@ class Player(pygame.sprite.Sprite):
         # Créer le groupe des bombes
         self.all_bombs = pygame.sprite.Group()
         self.nb_bombs = 0
-        # est fantome
+        # Est fantome
         self.is_ghost = False
+        # Change l'image du joueur en fantome
         self.ghost_path = f"assets/ghost_{sprite_ghost}.png"
         self.ghost_image = pygame.image.load(self.ghost_path)
         # Utilise le numéro de joueur pour lui assigner des datas

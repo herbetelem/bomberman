@@ -3,7 +3,6 @@
 # IMPORTS
 import pygame
 import json
-import random
 
 # Code additionnel
 from rock import Rock
@@ -24,43 +23,42 @@ class Game:
         self.avatar_players = [False] * self.nb_joueur
         # definit si les player et la map on été créer
         self.avatar_set = False
-        
 
         # Créer le groupe de sprites
         self.rocks_breakable = pygame.sprite.Group()
         self.rocks_unbreakable = pygame.sprite.Group()
         self.all_grass = pygame.sprite.Group()
         self.all_avatar = pygame.sprite.Group()
-        
+
         # appel des fonctions qui créeront la map et les joueurs
         # self.create_player()
         # self.create_map()
-        
+
         # liste des coordonée et nom de chaque avatar du menu
         #                             alex                 alexandre              aurelia                  hadrien                 laura                melanie
         self.avatar_menu_axe = [[230, 100, "alex"], [630, 100, "alexandre"], [1030, 100, "aurelia"], [230, 350, "hadrien"], [630, 350, "laura"], [1030, 350, "melanie"], [230, 600, "alex"], [630, 600, "alex"], [1030, 600, "alex"]]
         for index in range(9):
             avatar_menu = Avatar_menu(self.avatar_menu_axe[index][0], self.avatar_menu_axe[index][1], self.avatar_menu_axe[index][2])
             self.all_avatar.add(avatar_menu)
-            
-            
-        # TIMER #
-        # initialiser le timer
-        self.clock = pygame.time.Clock() 
-        # La limite de temps est de 10 minutes (en ms)
-        self.timer = 600000
-        # Choisis la police d'écriture
-        self.game_font = pygame.font.SysFont('Bahnschrift', 30)
-        
+
         # créer la librairie de touche
         self.pressed = {}
 
 
     # Fonction qui vas appeler a la creation de la map et des joueur
-    def call_map_and_player(self):
+    def call_map_and_timer(self):
+        # Tous les avatars sont choisis
         self.avatar_set = True
-        self.create_player()
+        # Créer et affiche la map
         self.create_map()
+
+        # TIMER #
+        # initialiser le timer
+        self.clock = pygame.time.Clock()
+        # La limite de temps est de 10 minutes (en ms)
+        self.timer = 600000
+        # Choisis la police d'écriture
+        self.game_font = pygame.font.SysFont('Bahnschrift', 30)
 
     # Fonction qui vas créer la map et les joueurs
     def create_player(self):
@@ -73,15 +71,13 @@ class Game:
         # Position joueurs
         #                P1            P2          P3         P4
         player_x_y = [[55, 130], [1255, 630], [1255, 130], [55, 630]]
-        # nom des avatar possible
-        list_avatar = ["alexandre", "alex", "laura", "melanie", "aurelia", "hadrien"]
+        # Créer les joueurs
         for index in range(0, (self.nb_joueur)):
-            # je choisi un avatar random parmis ceux qui reste
-            avatar = random.randint(0, len(list_avatar) - 1)
-            player = Player(self, player_x_y[index][0], player_x_y[index][1], (index + 1), list_avatar[avatar])
+            # Génére un joueur en fonction du nombre de joueur
+            player = Player(self, player_x_y[index][0], player_x_y[index][1], (index + 1))
+            # Ajoute le joueur crée à la liste des joueurs
             self.players.append(player)
-            self.all_players.add(player)
-            
+
     def create_map(self):
         # MAP #
         # Liste des rochers
@@ -99,7 +95,7 @@ class Game:
             # Map pour 4 joueurs
             with open("assets/map/4_players_map.json", "r") as load:
                 self. rock_list = json.loads(load.read())
-        
+
         # Créer la banniere en fonction du nombre de joueur
         self.banner = Banner(self.nb_joueur)
         # Créer les blocs en parcourant la liste
@@ -118,7 +114,6 @@ class Game:
                     self.all_grass.add(self.grass_tile)
                 x += 50
             y += 50
-
 
 
     def update(self, screen):
@@ -240,37 +235,28 @@ class Game:
                         self.players[3].moove("d")
             except IndexError:
                 pass
-            
+
         # Si les avatar ne sont pas set
         else:
-            # update le menu
+            # Update le menu
             for avatar in self.all_avatar:
+                # Affiche les avatars sur le menu
                 screen.blit(avatar.image, avatar.rect)
-    
+
     def check_collision(self, sprite, group):
+        """
+            Vérifie si un joueur entre en colisions
+        """
+
         return pygame.sprite.spritecollide(sprite, group, False, pygame.sprite.collide_mask)
 
     def status_printer(self, screen, player):
         """
             Affiche le statut du joueur (vivant / nombres de bombes sur la map)
         """
+
         # Affiche l'avatar du joueur
         screen.blit(player.image, player.status_position_list[0])
-        # Affiche les bombes du joueur
-        if len(player.all_bombs) == 1:
-            # Le joueur a 1 bombe sur la map
-            screen.blit(pygame.image.load("assets/bomb.png"), player.status_position_list[1])
-        elif len(player.all_bombs) == 2:
-            # Le joueur a 2 bombe sur la map
-            screen.blit(pygame.image.load("assets/bomb.png"), player.status_position_list[1])
-            screen.blit(pygame.image.load("assets/bomb.png"), player.status_position_list[2])
-        elif len(player.all_bombs) == 3:
-            # Le joueur a 3 bombe sur la map
-            screen.blit(pygame.image.load("assets/bomb.png"), player.status_position_list[1])
-            screen.blit(pygame.image.load("assets/bomb.png"), player.status_position_list[2])
-            screen.blit(pygame.image.load("assets/bomb.png"), player.status_position_list[3])
-            
-        # ???????????????????? #
-        # for index in range(1, len(player.all_bombs) + 1):
-        #     screen.blit(pygame.image.load("assets/bomb.png"), player.status_position_list[index])
-        # ???????????????????? #
+        # Affiche le nombre de bombes sur la map
+        for index in range(1, len(player.all_bombs) + 1):
+            screen.blit(pygame.image.load("assets/bomb.png"), player.status_position_list[index])
