@@ -20,7 +20,7 @@ class Bomb(pygame.sprite.Sprite):
         self.animation_1 = set_timeout(self.hot_2, 1)
         self.animation_1 = set_timeout(self.hot_3, 1.5)
         self.boom = set_timeout(self.explosion, 2)
-        self.image = pygame.image.load("assets/bomb.png")
+        self.image = pygame.image.load("assets/bombs/bomb.png")
         self.rect = self.image.get_rect()
         self.rect.x = player.rect.x
         self.rect.y = player.rect.y
@@ -33,13 +33,13 @@ class Bomb(pygame.sprite.Sprite):
 
     def hot_1(self):
         # chagement de la sprite en fonction de l'étape
-        self.image = pygame.image.load("assets/bomb_hot_1.png")
+        self.image = pygame.image.load("assets/bombs/bomb_hot_1.png")
     def hot_2(self):
         # chagement de la sprite en fonction de l'étape
-        self.image = pygame.image.load("assets/bomb_hot_2.png")
+        self.image = pygame.image.load("assets/bombs/bomb_hot_2.png")
     def hot_3(self):
         # chagement de la sprite en fonction de l'étape
-        self.image = pygame.image.load("assets/bomb_hot_3.png")
+        self.image = pygame.image.load("assets/bombs/bomb_hot_3.png")
 
 
     def explosion(self):
@@ -51,14 +51,14 @@ class Bomb(pygame.sprite.Sprite):
         son = pygame.mixer.Sound("assets/sounds/boom.ogg")
         son.play()
         # Change l'image de la bombe
-        self.image = pygame.image.load("assets/boom.png")
+        self.image = pygame.image.load("assets/bombs/boom.png")
         # La bombe se supprime aprés 1sec
         set_timeout(self.remove, 1)
         # créer les 4 flammes
-        self.all_projectiles_top.add(Projectile(self, "assets/projectile.png", "top"))
-        self.all_projectiles_bot.add(Projectile(self, "assets/projectile.png", "bot"))
-        self.all_projectiles_left.add(Projectile(self, "assets/projectile.png", "left"))
-        self.all_projectiles_right.add(Projectile(self, "assets/projectile.png", "right"))
+        self.all_projectiles_top.add(Projectile(self, "assets/bombs/projectile.png", "top"))
+        self.all_projectiles_bot.add(Projectile(self, "assets/bombs/projectile.png", "bot"))
+        self.all_projectiles_left.add(Projectile(self, "assets/bombs/projectile.png", "left"))
+        self.all_projectiles_right.add(Projectile(self, "assets/bombs/projectile.png", "right"))
 
 
     def remove(self):
