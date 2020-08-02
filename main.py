@@ -60,6 +60,12 @@ button_2_rect.y = ceil(screen.get_height() / 2.8)
 button_3_rect.y = ceil(screen.get_height() / 1.76)
 button_4_rect.y = ceil(screen.get_height() / 1.3)
 
+# créer les fond de victoire ou defaite
+# win_bg = pygame.image.load('assets/win_bg.png')
+game_over_bg = pygame.image.load('assets/game_over_bg.jpg')
+# Change la taille des boutons pour
+# win_bg = pygame.transform.scale(button_2, (ceil(screen.get_width() / 5.5), ceil(screen.get_height() / 6)))
+game_over_bg = pygame.transform.scale(game_over_bg, (screen.get_width(), screen.get_height()))
 
 # le jeux est en cours
 running = True
@@ -183,8 +189,7 @@ while running:
         # Fond noir
         screen.fill((0, 0, 0))
         # Affiche l'écran de défaite
-        game_over = pygame.image.load("assets/game_over.jpg")
-        screen.blit(game_over, (35, 0))
+        screen.blit(game_over_bg, (0, 0))
         # Affiche le bouton replay
         pygame.draw.rect(screen, (74, 85, 102), (620, 645, 110, 50))
         screen.blit(replay_text, (630, 650))

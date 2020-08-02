@@ -10,6 +10,7 @@ from grass import Grass
 from banner import Banner
 from player import Player
 from avatar_menu import Avatar_menu
+from avatar_bg import Avatar_bg
 
 # créer la classe game qui vas gerer les parties
 class Game:
@@ -37,11 +38,13 @@ class Game:
         # self.create_map()
 
         # liste des coordonée et nom de chaque avatar du menu
-        #                             alex                 alexandre              aurelia                  hadrien                 laura                melanie
-        self.avatar_menu_axe = [[230, 100, "alex"], [630, 100, "alexandre"], [1030, 100, "aurelia"], [230, 350, "hadrien"], [630, 350, "laura"], [1030, 350, "melanie"], [230, 600, "alex"], [630, 600, "alex"], [1030, 600, "alex"]]
+        #                             alex                 alexandre              aurelia                  hadrien                 laura                melanie              guillaume                   wilfried
+        self.avatar_menu_axe = [[230, 100, "alex"], [630, 100, "alexandre"], [1030, 100, "aurelia"], [230, 350, "hadrien"], [630, 350, "laura"], [1030, 350, "melanie"], [230, 600, "guillaume"], [630, 600, "wilfried"], [1030, 600, "alex"]]
         for index in range(9):
             avatar_menu = Avatar_menu(self.avatar_menu_axe[index][0], self.avatar_menu_axe[index][1], self.avatar_menu_axe[index][2])
             self.all_avatar.add(avatar_menu)
+        # background du menu
+        self.avatar_bg = Avatar_bg()
 
         # créer la librairie de touche
         self.pressed = {}
@@ -58,7 +61,8 @@ class Game:
         # initialiser le timer
         self.clock = pygame.time.Clock()
         # La limite de temps est de 10 minutes (en ms)
-        self.timer = 600000
+        # self.timer = 600000
+        self.timer = 600
 
     # Fonction qui vas créer la map et les joueurs
     def create_player(self):
@@ -241,7 +245,7 @@ class Game:
             Affiche le menu d'avatar en fonction du joueur qui doit sélectionner
         """
         # Refresh le background
-        screen.fill((56, 135, 0))
+        screen.blit(self.avatar_bg.image, self.avatar_bg.rect)
         # Update le menu
         for avatar in self.all_avatar:
             # Affiche les avatars sur le menu
