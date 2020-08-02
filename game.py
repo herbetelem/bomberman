@@ -39,7 +39,9 @@ class Game:
         self.rocks_breakable = pygame.sprite.Group()
         self.rocks_unbreakable = pygame.sprite.Group()
         self.all_grass = pygame.sprite.Group()
-        self.banner = Banner()
+        
+        # Créer la banniere en fonction du nombre de joueur
+        self.banner = Banner(self.nb_joueur)
         # Créer les blocs en parcourant la liste
         y = 75
         for rock in self.rock_list:
@@ -70,7 +72,7 @@ class Game:
         list_avatar = ["alexandre", "alex", "laura", "melanie", "aurelia", "hadrien"]
         for index in range(0, (nb_joueur)):
             # je choisi un avatar random parmis ceux qui reste
-            avatar = random.randint(0, len(list_avatar))
+            avatar = random.randint(0, len(list_avatar) - 1)
             player = Player(self, player_x_y[index][0], player_x_y[index][1], (index + 1), list_avatar[avatar])
             self.players.append(player)
             self.all_players.add(player)
