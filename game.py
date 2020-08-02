@@ -61,8 +61,7 @@ class Game:
         # initialiser le timer
         self.clock = pygame.time.Clock()
         # La limite de temps est de 10 minutes (en ms)
-        # self.timer = 600000
-        self.timer = 600
+        self.timer = 600000
 
     # Fonction qui vas créer la map et les joueurs
     def create_player(self):

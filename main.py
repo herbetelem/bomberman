@@ -61,10 +61,10 @@ button_3_rect.y = ceil(screen.get_height() / 1.76)
 button_4_rect.y = ceil(screen.get_height() / 1.3)
 
 # créer les fond de victoire ou defaite
-# win_bg = pygame.image.load('assets/win_bg.png')
+win_bg = pygame.image.load('assets/win_bg.jpg')
 game_over_bg = pygame.image.load('assets/game_over_bg.jpg')
 # Change la taille des boutons pour
-# win_bg = pygame.transform.scale(button_2, (ceil(screen.get_width() / 5.5), ceil(screen.get_height() / 6)))
+win_bg = pygame.transform.scale(win_bg, (screen.get_width(), screen.get_height()))
 game_over_bg = pygame.transform.scale(game_over_bg, (screen.get_width(), screen.get_height()))
 
 # le jeux est en cours
@@ -166,15 +166,16 @@ while running:
         else:
             pygame.mixer.music.set_volume(0.06)
         # Affiche l'écran de victoire
-        # Fond noir
-        screen.fill((0, 0, 0))
+        screen.blit(win_bg, (0, 0))
+        
         for player in game.players:
             # Regarde dans la liste de joueur celui qui est vivant
             if player.alive():
                 # Le joueur est vivant, récupére son image
                 winner = player.image
+                winner = pygame.transform.scale(winner, (70, 70))
         # Affiche l'avatar du gagnant
-        screen.blit(winner, (screen.get_width() / 2.1, screen.get_height() / 2.1))
+        screen.blit(winner, (screen.get_width() / 2.1, screen.get_height() / 3 * 2))
         # Affiche le bouton replay
         pygame.draw.rect(screen, (74, 85, 102), (620, 645, 110, 50))
         screen.blit(replay_text, (630, 650))
