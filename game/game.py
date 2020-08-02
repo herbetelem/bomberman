@@ -5,12 +5,12 @@ import pygame
 import json
 
 # Code additionnel
-from map_object import Rock
-from map_object import Grass
-from map_object import Banner
-from player import Player
-from avatar_menu import Avatar_menu
-from avatar_bg import Avatar_bg
+from game.map_objects.map_object import Rock
+from game.map_objects.map_object import Grass
+from game.map_objects.map_object import Banner
+from game.player import Player
+from game.menu.avatar_menu import Avatar_menu
+from game.menu.avatar_bg import Avatar_bg
 
 # créer la classe game qui vas gerer les parties
 class Game:
