@@ -7,7 +7,7 @@ class Avatar_menu(pygame.sprite.Sprite):
     def __init__(self, x, y, name):
         # Sprite class init
         super().__init__()
-        # Load le sprite de l'herbe
+        # Load le sprite des avatar
         self.path_image = f"assets/avatar/{name}.png"
         self.image = pygame.image.load(self.path_image)
         self.image = pygame.transform.scale(self.image, (100, 100))
