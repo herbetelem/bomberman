@@ -6,7 +6,7 @@ import random
 import pygame
 
 # Code additionel
-from game import Game
+from game.game import Game
 
 
 # Initialise Pygame

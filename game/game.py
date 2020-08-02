@@ -5,9 +5,9 @@ import pygame
 import json
 
 # Code additionnel
-from rock import Rock
-from grass import Grass
-from banner import Banner
+from map_object import Rock
+from map_object import Grass
+from map_object import Banner
 from player import Player
 from avatar_menu import Avatar_menu
 from avatar_bg import Avatar_bg
