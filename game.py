@@ -87,6 +87,8 @@ class Game:
         
         # créer la librairie de touche
         self.pressed = {}
+        
+        
 
 
     def update(self, screen):
@@ -172,6 +174,7 @@ class Game:
         elif self.pressed.get(pygame.K_l):
             if (self.players[1].rect.x + self.players[1].rect.width) < (screen.get_width() - 50):
                 self.players[1].moove("d")
+                
 
         # check ver la ou le joueur 3 veut aller
         try:
@@ -229,3 +232,8 @@ class Game:
             screen.blit(pygame.image.load("assets/bomb.png"), player.status_position_list[1])
             screen.blit(pygame.image.load("assets/bomb.png"), player.status_position_list[2])
             screen.blit(pygame.image.load("assets/bomb.png"), player.status_position_list[3])
+            
+        # ???????????????????? #
+        # for index in range(1, len(player.all_bombs) + 1):
+        #     screen.blit(pygame.image.load("assets/bomb.png"), player.status_position_list[index])
+        # ???????????????????? #

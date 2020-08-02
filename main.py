@@ -82,6 +82,14 @@ end_game_lost = False
 # Créer le bouton replay
 button_replay = pygame.draw.rect(screen, (74, 85, 102), (630, 645, 110, 50))
 
+# créer la liste pour la manette
+joysticks = []
+
+# créer les mannette
+for index in range(pygame.joystick.get_count()):
+    joysticks.append(pygame.joystick.Joystick(index))
+    joysticks[-1].init()
+
 # Boucle tant que running est vrai
 while running:
     
@@ -255,3 +263,18 @@ while running:
             # detecter si un joueur lache une touche
             elif event.type == pygame.KEYUP:
                 game.pressed[event.key] = False
+                
+            # detecter la manette
+            if event.type == pygame.JOYBUTTONDOWN:
+                if event.button == 4 or event.button == 5:
+                    game.players[0].drop_bomb()
+            
+            if event.type == pygame.JOYHATMOTION:
+                if event.value[0] == 1:
+                    game.players[0].moove("d")
+                if event.value[0] == -1:
+                    game.players[0].moove("q")
+                if event.value[1] == -1:
+                    game.players[0].moove("s")
+                if event.value[1] == 1:
+                    game.players[0].moove("z")
