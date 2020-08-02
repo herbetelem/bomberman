@@ -127,20 +127,21 @@ while running:
         # Refresh l'affichage
         game.update(screen)
 
-        # Conditions de victoire
-        if len(game.all_players) == 1 or game.timer <= 0:
-            # Stop la musique du jeu
-            music_game = False
-            pygame.mixer.music.stop()
-            # Stop la partie
-            game_status = False
+        if game.avatar_set:
+            # Conditions de victoire
+            if len(game.all_players) == 1 or game.timer <= 0:
+                # Stop la musique du jeu
+                music_game = False
+                pygame.mixer.music.stop()
+                # Stop la partie
+                game_status = False
 
-            if len(game.all_players) == 1:
-                # Déclare la fin de partie
-                end_game_win = True
-            elif game.timer <= 0:
-                # Déclare la fin de partie
-                end_game_lost = True
+                if len(game.all_players) == 1:
+                    # Déclare la fin de partie
+                    end_game_win = True
+                elif game.timer <= 0:
+                    # Déclare la fin de partie
+                    end_game_lost = True
 
 
     if end_game_win and not music_win and not music_lost:
@@ -208,14 +209,21 @@ while running:
             # je def le nombre de joueur
             
             if button_2_rect.collidepoint(event.pos):
-                game_status = True
+                # game_status = True
                 nb_joueur = 2
             elif button_3_rect.collidepoint(event.pos):
-                game_status = True
+                # game_status = True
                 nb_joueur = 3
             elif button_4_rect.collidepoint(event.pos):
-                game_status = True
+                # game_status = True
                 nb_joueur = 4
+                
+            # je check que game status est ok et si oui si on click sur un avatar sa lance la game
+            if game_status:
+                if not game.avatar_set:
+                    for avatar in game.all_avatar:
+                        if avatar.rect.collidepoint(event.pos):
+                            game.call_map_and_player()
                 
             # appliquer le backrgound et créer la game a chaque lancement de parti
             if button_2_rect.collidepoint(event.pos) or button_3_rect.collidepoint(event.pos) or button_4_rect.collidepoint(event.pos):
@@ -223,6 +231,7 @@ while running:
                 screen.fill((56, 135, 0))
                 # Lance la partie avec le nombre de joueurs choisis
                 game = Game(nb_joueur)
+                game_status = True
                 # Charge les rochers
                 game.update(screen)
             if button_replay.collidepoint(event.pos) and (end_game_lost or end_game_win):
@@ -231,7 +240,7 @@ while running:
                 music_win = False
                 music_lost = False
 
-        if game_status:
+        if game_status and game.avatar_set:
             # detecter si un joueur appuie sur une touche
             if event.type == pygame.KEYDOWN:
                 # Joueur 1
