@@ -272,9 +272,29 @@ while running:
             if event.type == pygame.JOYHATMOTION:
                 if event.value[0] == 1:
                     game.players[0].moove("d")
+                    game.players[0].moove("d")
+                    game.players[0].moove("d")
+                    game.players[0].moove("d")
+                    game.players[0].moove("d")
+                    game.players[0].moove("d")
                 if event.value[0] == -1:
+                    game.players[0].moove("q")
+                    game.players[0].moove("q")
+                    game.players[0].moove("q")
+                    game.players[0].moove("q")
+                    game.players[0].moove("q")
                     game.players[0].moove("q")
                 if event.value[1] == -1:
                     game.players[0].moove("s")
+                    game.players[0].moove("s")
+                    game.players[0].moove("s")
+                    game.players[0].moove("s")
+                    game.players[0].moove("s")
+                    game.players[0].moove("s")
                 if event.value[1] == 1:
+                    game.players[0].moove("z")
+                    game.players[0].moove("z")
+                    game.players[0].moove("z")
+                    game.players[0].moove("z")
+                    game.players[0].moove("z")
                     game.players[0].moove("z")
