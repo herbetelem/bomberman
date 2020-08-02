@@ -136,7 +136,7 @@ while running:
 
         if game.avatar_set:
             # Conditions de victoire
-            if len(game.all_players) == 1 or game.timer <= 0:
+            if len(game.all_players) < 2 or game.timer <= 0:
                 # Stop la musique du jeu
                 music_game = False
                 pygame.mixer.music.stop()
@@ -146,7 +146,7 @@ while running:
                 if len(game.all_players) == 1:
                     # Déclare la fin de partie
                     end_game_win = True
-                elif game.timer <= 0:
+                elif game.timer <= 0 or len(game.all_players) < 1:
                     # Déclare la fin de partie
                     end_game_lost = True
 
@@ -264,7 +264,7 @@ while running:
                 game_status = True
                 # Créer les joueurs avec l'architecture de base
                 game.create_player()
-
+                # Affiche le menu de choix d'avatar
                 game.avatar_menu_update(screen, i)
             if button_replay.collidepoint(event.pos) and (end_game_lost or end_game_win):
                 # Si le joueur clic sur le bouton replay
