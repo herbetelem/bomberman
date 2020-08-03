@@ -251,10 +251,10 @@ while running:
                             i += 1
                             game.avatar_menu_update(screen, i)
                     if i == nb_joueur:
-                        # i = au nombre de joueurs, tous les joueurs ont un avatar
+                        #  i = au nombre de joueurs, tous les joueurs ont un avatar
                         # Lancement du timer et création de la map
                         game.call_map_and_timer()
-                
+
             # appliquer le backrgound et créer la game a chaque lancement de parti
             if button_2_rect.collidepoint(event.pos) or button_3_rect.collidepoint(event.pos) or button_4_rect.collidepoint(event.pos):
                 # Appliquer le background
@@ -278,11 +278,11 @@ while running:
             # detecter si un joueur appuie sur une touche
             if event.type == pygame.KEYDOWN:
                 # Joueur 1
-                if event.key == pygame.K_q:
+                if event.key == pygame.K_LSHIFT:
                     # Le joueur 1 appuis sur A => Pose une bombe
                     game.players[0].drop_bomb()
                 # Joueur 2
-                elif event.key == pygame.K_u:
+                elif event.key == pygame.K_RETURN:
                     # Le joueur 2 appuis sur U => Pose une bombe
                     game.players[1].drop_bomb()
                 # Joueur 3
