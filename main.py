@@ -229,7 +229,7 @@ while running:
                 nb_joueur = 4
                 # Déclare i pour le choix d'avatar
                 i = 0
-                
+
             # je check que game status est ok et si oui si on click sur un avatar sa lance la game
             if game_status:
                 # Game est lancé
@@ -302,7 +302,7 @@ while running:
                 else:
                     # Autres touches
                     game.pressed[event.key] = True
-        
+
             # detecter si un joueur lache une touche
             elif event.type == pygame.KEYUP:
                 game.pressed[event.key] = False
