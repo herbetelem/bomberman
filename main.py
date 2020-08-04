@@ -315,7 +315,7 @@ while running:
             # detecter si le joueur utilise le pad
             if event.type == pygame.JOYHATMOTION:
                 if event.value[0] == 1:
-                    # on apelle 6 fois la fonction moove car sinon le joueur ce deplace trop lentement
+                    # on apelle 10 fois la fonction moove car sinon le joueur ce deplace trop lentement
                     for i in range(10):
                         game.players[0].moove("d")
                 if event.value[0] == -1:
