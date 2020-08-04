@@ -316,14 +316,14 @@ while running:
             if event.type == pygame.JOYHATMOTION:
                 if event.value[0] == 1:
                     # on apelle 6 fois la fonction moove car sinon le joueur ce deplace trop lentement
-                    for i in range(6):
+                    for i in range(10):
                         game.players[0].moove("d")
                 if event.value[0] == -1:
-                    for i in range(6):
+                    for i in range(10):
                         game.players[0].moove("q")
                 if event.value[1] == -1:
-                    for i in range(6):
+                    for i in range(10):
                         game.players[0].moove("s")
                 if event.value[1] == 1:
-                    for i in range(6):
+                    for i in range(10):
                         game.players[0].moove("z")
