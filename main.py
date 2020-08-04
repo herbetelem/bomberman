@@ -277,6 +277,7 @@ while running:
         if game_status and game.avatar_set:
             # detecter si un joueur appuie sur une touche
             if event.type == pygame.KEYDOWN:
+                
                 # Joueur 1
                 # check ver la ou le joueur 1 veut aller
                 # pygame prend les touches en qwerty donc w->z a->q
@@ -296,15 +297,33 @@ while running:
                     if (game.players[0].rect.x + game.players[0].rect.width) < (screen.get_width() - 50):
                         for i in range(10):
                             game.players[0].moove("d")
-                
-                
                 if event.key == pygame.K_LSHIFT:
                     # Le joueur 1 appuis sur A => Pose une bombe
                     game.players[0].drop_bomb()
+                    
+                    
                 # Joueur 2
-                elif event.key == pygame.K_RETURN:
+                # check ver la ou le joueur 2 veut aller
+                if event.key == pygame.K_i:
+                    if (game.players[1].rect.y) > 130:
+                        for i in range(10):
+                            game.players[1].moove("z")
+                elif event.key == pygame.K_j:
+                    if (game.players[1].rect.x) > 50:
+                        for i in range(10):
+                            game.players[1].moove("q")
+                elif event.key == pygame.K_k:
+                    if (game.players[1].rect.y + game.players[1].rect.width) < (screen.get_height() - 50):
+                        for i in range(10):
+                            game.players[1].moove("s")
+                elif event.key == pygame.K_l:
+                    if (game.players[1].rect.x + game.players[1].rect.width) < (screen.get_width() - 50):
+                        for i in range(10):
+                            game.players[1].moove("d")
+                if event.key == pygame.K_RETURN:
                     # Le joueur 2 appuis sur U => Pose une bombe
                     game.players[1].drop_bomb()
+                
                 # Joueur 3
                 try:
                     if event.key == pygame.K_KP0:
@@ -312,13 +331,48 @@ while running:
                         game.players[2].drop_bomb()
                 except IndexError:
                     pass
+                
+                # check ver la ou le joueur 3 veut aller
+                if nb_joueur >= 3:
+                    if event.key == pygame.K_KP8:
+                        if (game.players[2].rect.y) > 130:
+                            for i in range(10):
+                                game.players[2].moove("z")
+                    elif event.key == pygame.K_KP4:
+                        if (game.players[2].rect.x) > 50:
+                            for i in range(10):
+                                game.players[2].moove("q")
+                    elif event.key == pygame.K_KP5:
+                        if (game.players[2].rect.y + game.players[2].rect.width) < (screen.get_height() - 50):
+                            for i in range(10):
+                                game.players[2].moove("s")
+                    elif event.key == pygame.K_KP6:
+                        if (game.players[2].rect.x + game.players[2].rect.width) < (screen.get_width() - 50):
+                            for i in range(10):
+                                game.players[2].moove("d")
+                
                 # Joueur 4
-                try:
+                # check ver la ou le joueur 4 veut aller
+                if nb_joueur == 4:
+                    if event.key == pygame.K_UP:
+                        if (game.players[3].rect.y) > 130:
+                            for i in range(10):
+                                game.players[3].moove("z")
+                    elif event.key == pygame.K_LEFT:
+                        if (game.players[3].rect.x) > 50:
+                            for i in range(10):
+                                game.players[3].moove("q")
+                    elif event.key == pygame.K_DOWN:
+                        if (game.players[3].rect.y + game.players[3].rect.width) < (screen.get_height() - 50):
+                            for i in range(10):
+                                game.players[3].moove("s")
+                    elif event.key == pygame.K_RIGHT:
+                        if (game.players[3].rect.x + game.players[3].rect.width) < (screen.get_width() - 50):
+                            for i in range(10):
+                                game.players[3].moove("d")
                     if event.key == pygame.K_SPACE:
                         # Le joueur 4 appuis sur ESPACE => Pose une bombe
                         game.players[3].drop_bomb()
-                except IndexError:
-                    pass
                 else:
                     # Autres touches
                     game.pressed[event.key] = True

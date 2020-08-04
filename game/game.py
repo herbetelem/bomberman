@@ -165,70 +165,7 @@ class Game:
             # Affiche les joueurs et le nombre de bombes
             for player in self.players:
                 self.status_printer(screen, player)
-
-            # # check ver la ou le joueur 1 veut aller
-            # # pygame prend les touches en qwerty donc w->z a->q
-            # if self.pressed.get(pygame.K_w):
-            #     if (self.players[0].rect.y) > 130:
-            #         self.players[0].moove("z")
-            # elif self.pressed.get(pygame.K_a):
-            #     if (self.players[0].rect.x) > 50:
-            #         self.players[0].moove("q")
-            # elif self.pressed.get(pygame.K_s):
-            #     if (self.players[0].rect.y + self.players[0].rect.width) < (screen.get_height() - 50):
-            #         self.players[0].moove("s")
-            # elif self.pressed.get(pygame.K_d):
-            #     if (self.players[0].rect.x + self.players[0].rect.width) < (screen.get_width() - 50):
-            #         self.players[0].moove("d")
-
-            # check ver la ou le joueur 2 veut aller
-            if self.pressed.get(pygame.K_i):
-                if (self.players[1].rect.y) > 130:
-                    self.players[1].moove("z")
-            elif self.pressed.get(pygame.K_j):
-                if (self.players[1].rect.x) > 50:
-                    self.players[1].moove("q")
-            elif self.pressed.get(pygame.K_k):
-                if (self.players[1].rect.y + self.players[1].rect.width) < (screen.get_height() - 50):
-                    self.players[1].moove("s")
-            elif self.pressed.get(pygame.K_l):
-                if (self.players[1].rect.x + self.players[1].rect.width) < (screen.get_width() - 50):
-                    self.players[1].moove("d")
                     
-
-            # check ver la ou le joueur 3 veut aller
-            try:
-                if self.pressed.get(pygame.K_KP8):
-                    if (self.players[2].rect.y) > 130:
-                        self.players[2].moove("z")
-                elif self.pressed.get(pygame.K_KP4):
-                    if (self.players[2].rect.x) > 50:
-                        self.players[2].moove("q")
-                elif self.pressed.get(pygame.K_KP5):
-                    if (self.players[2].rect.y + self.players[2].rect.width) < (screen.get_height() - 50):
-                        self.players[2].moove("s")
-                elif self.pressed.get(pygame.K_KP6):
-                    if (self.players[2].rect.x + self.players[2].rect.width) < (screen.get_width() - 50):
-                        self.players[2].moove("d")
-            except IndexError:
-                pass
-
-            # check ver la ou le joueur 4 veut aller
-            try:
-                if self.pressed.get(pygame.K_UP):
-                    if (self.players[3].rect.y) > 130:
-                        self.players[3].moove("z")
-                elif self.pressed.get(pygame.K_LEFT):
-                    if (self.players[3].rect.x) > 50:
-                        self.players[3].moove("q")
-                elif self.pressed.get(pygame.K_DOWN):
-                    if (self.players[3].rect.y + self.players[3].rect.width) < (screen.get_height() - 50):
-                        self.players[3].moove("s")
-                elif self.pressed.get(pygame.K_RIGHT):
-                    if (self.players[3].rect.x + self.players[3].rect.width) < (screen.get_width() - 50):
-                        self.players[3].moove("d")
-            except IndexError:
-                pass
 
     def avatar_menu_update(self, screen, i):
         """
