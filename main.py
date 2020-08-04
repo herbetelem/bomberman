@@ -232,7 +232,7 @@ while running:
                 nb_joueur = 4
                 # Déclare i pour le choix d'avatar
                 i = 0
-                
+
             # je check que game status est ok et si oui si on click sur un avatar sa lance la game
             if game_status:
                 # Game est lancé
@@ -254,13 +254,19 @@ while running:
                             i += 1
                             game.avatar_menu_update(screen, i)
                     if i == nb_joueur:
-                        # i = au nombre de joueurs, tous les joueurs ont un avatar
+                        #  i = au nombre de joueurs, tous les joueurs ont un avatar
                         # Lancement du timer et création de la map
                         game.call_map_and_timer()
-                        for obj in gc.get_objects():
-                            if isinstance(obj, Game):
-                                print(obj)
-                        print()
+                        
+
+                        # DEBUG #
+                        # Check instance ojects
+                        # for obj in gc.get_objects():
+                        #     if isinstance(obj, Game):
+                        #         print(obj)
+                        # print()
+                        # DEBUG #
+
             # appliquer le backrgound et créer la game a chaque lancement de parti
             if button_2_rect.collidepoint(event.pos) or button_3_rect.collidepoint(event.pos) or button_4_rect.collidepoint(event.pos):
                 # Appliquer le background
@@ -284,11 +290,11 @@ while running:
             # detecter si un joueur appuie sur une touche
             if event.type == pygame.KEYDOWN:
                 # Joueur 1
-                if event.key == pygame.K_q:
+                if event.key == pygame.K_LSHIFT:
                     # Le joueur 1 appuis sur A => Pose une bombe
                     game.players[0].drop_bomb()
                 # Joueur 2
-                elif event.key == pygame.K_u:
+                elif event.key == pygame.K_RETURN:
                     # Le joueur 2 appuis sur U => Pose une bombe
                     game.players[1].drop_bomb()
                 # Joueur 3
@@ -308,7 +314,7 @@ while running:
                 else:
                     # Autres touches
                     game.pressed[event.key] = True
-        
+
             # detecter si un joueur lache une touche
             elif event.type == pygame.KEYUP:
                 game.pressed[event.key] = False
@@ -321,15 +327,15 @@ while running:
             # detecter si le joueur utilise le pad
             if event.type == pygame.JOYHATMOTION:
                 if event.value[0] == 1:
-                    # on apelle 6 fois la fonction moove car sinon le joueur ce deplace trop lentement
-                    for i in range(6):
+                    # on apelle 10 fois la fonction moove car sinon le joueur ce deplace trop lentement
+                    for i in range(10):
                         game.players[0].moove("d")
                 if event.value[0] == -1:
-                    for i in range(6):
+                    for i in range(10):
                         game.players[0].moove("q")
                 if event.value[1] == -1:
-                    for i in range(6):
+                    for i in range(10):
                         game.players[0].moove("s")
                 if event.value[1] == 1:
-                    for i in range(6):
+                    for i in range(10):
                         game.players[0].moove("z")
