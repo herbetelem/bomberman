@@ -166,20 +166,20 @@ class Game:
             for player in self.players:
                 self.status_printer(screen, player)
 
-            # check ver la ou le joueur 1 veut aller
-            # pygame prend les touches en qwerty donc w->z a->q
-            if self.pressed.get(pygame.K_w):
-                if (self.players[0].rect.y) > 130:
-                    self.players[0].moove("z")
-            elif self.pressed.get(pygame.K_a):
-                if (self.players[0].rect.x) > 50:
-                    self.players[0].moove("q")
-            elif self.pressed.get(pygame.K_s):
-                if (self.players[0].rect.y + self.players[0].rect.width) < (screen.get_height() - 50):
-                    self.players[0].moove("s")
-            elif self.pressed.get(pygame.K_d):
-                if (self.players[0].rect.x + self.players[0].rect.width) < (screen.get_width() - 50):
-                    self.players[0].moove("d")
+            # # check ver la ou le joueur 1 veut aller
+            # # pygame prend les touches en qwerty donc w->z a->q
+            # if self.pressed.get(pygame.K_w):
+            #     if (self.players[0].rect.y) > 130:
+            #         self.players[0].moove("z")
+            # elif self.pressed.get(pygame.K_a):
+            #     if (self.players[0].rect.x) > 50:
+            #         self.players[0].moove("q")
+            # elif self.pressed.get(pygame.K_s):
+            #     if (self.players[0].rect.y + self.players[0].rect.width) < (screen.get_height() - 50):
+            #         self.players[0].moove("s")
+            # elif self.pressed.get(pygame.K_d):
+            #     if (self.players[0].rect.x + self.players[0].rect.width) < (screen.get_width() - 50):
+            #         self.players[0].moove("d")
 
             # check ver la ou le joueur 2 veut aller
             if self.pressed.get(pygame.K_i):

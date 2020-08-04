@@ -278,6 +278,26 @@ while running:
             # detecter si un joueur appuie sur une touche
             if event.type == pygame.KEYDOWN:
                 # Joueur 1
+                # check ver la ou le joueur 1 veut aller
+                # pygame prend les touches en qwerty donc w->z a->q
+                if event.key == pygame.K_w:
+                    if (game.players[0].rect.y) > 130:
+                        for i in range(10):
+                            game.players[0].moove("z")
+                elif event.key == pygame.K_a:
+                    if (game.players[0].rect.x) > 50:
+                        for i in range(10):
+                            game.players[0].moove("q")
+                elif event.key == pygame.K_s:
+                    if (game.players[0].rect.y + game.players[0].rect.width) < (screen.get_height() - 50):
+                        for i in range(10):
+                            game.players[0].moove("s")
+                elif event.key == pygame.K_d:
+                    if (game.players[0].rect.x + game.players[0].rect.width) < (screen.get_width() - 50):
+                        for i in range(10):
+                            game.players[0].moove("d")
+                
+                
                 if event.key == pygame.K_LSHIFT:
                     # Le joueur 1 appuis sur A => Pose une bombe
                     game.players[0].drop_bomb()
@@ -327,3 +347,5 @@ while running:
                 if event.value[1] == 1:
                     for i in range(10):
                         game.players[0].moove("z")
+                        
+            
