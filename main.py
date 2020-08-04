@@ -1,5 +1,5 @@
 # coding: utf-8
-
+import gc
 # IMPORT
 from math import ceil
 import random
@@ -29,22 +29,22 @@ font = pygame.font.SysFont('Bahnschrift', 30)
 replay_text = font.render("Replay", True, (255, 255, 255))
 
 # importer la bannier
-banner = pygame.image.load('assets/bg/bg_nav.png')
+banner = pygame.image.load('assets/bg/bg_nav.png').convert()
 banner = pygame.transform.scale(banner, screen.get_size())
 
 # importer les boutons nav
-button_2 = pygame.image.load('assets/button/button_player_2.png')
-button_3 = pygame.image.load('assets/button/button_player_3.png')
-button_4 = pygame.image.load('assets/button/button_player_4.png')
+button_2 = pygame.image.load('assets/button/button_player_2.png').convert_alpha()
+button_3 = pygame.image.load('assets/button/button_player_3.png').convert_alpha()
+button_4 = pygame.image.load('assets/button/button_player_4.png').convert_alpha()
 # Change la taille des boutons pour
 button_2 = pygame.transform.scale(button_2, (ceil(screen.get_width() / 5.5), ceil(screen.get_height() / 6)))
 button_3 = pygame.transform.scale(button_3, (ceil(screen.get_width() / 5.5), ceil(screen.get_height() / 6)))
 button_4 = pygame.transform.scale(button_4, (ceil(screen.get_width() / 5.5), ceil(screen.get_height() / 6)))
 
 # Importer les shadows des boutons nav
-button_2_shadow = pygame.image.load('assets/button/button_player_shadow.png')
-button_3_shadow = pygame.image.load('assets/button/button_player_shadow.png')
-button_4_shadow = pygame.image.load('assets/button/button_player_shadow.png')
+button_2_shadow = pygame.image.load('assets/button/button_player_shadow.png').convert_alpha()
+button_3_shadow = pygame.image.load('assets/button/button_player_shadow.png').convert_alpha()
+button_4_shadow = pygame.image.load('assets/button/button_player_shadow.png').convert_alpha()
 button_2_shadow = pygame.transform.scale(button_2_shadow, (ceil(screen.get_width() / 5.5), ceil(screen.get_height() / 6)))
 button_3_shadow = pygame.transform.scale(button_3_shadow, (ceil(screen.get_width() / 5.5), ceil(screen.get_height() / 6)))
 button_4_shadow = pygame.transform.scale(button_4_shadow, (ceil(screen.get_width() / 5.5), ceil(screen.get_height() / 6)))
@@ -61,8 +61,8 @@ button_3_rect.y = ceil(screen.get_height() / 1.76)
 button_4_rect.y = ceil(screen.get_height() / 1.3)
 
 # créer les fond de victoire ou defaite
-win_bg = pygame.image.load('assets/bg/win_bg.jpg')
-game_over_bg = pygame.image.load('assets/bg/game_over_bg.jpg')
+win_bg = pygame.image.load('assets/bg/win_bg.jpg').convert()
+game_over_bg = pygame.image.load('assets/bg/game_over_bg.jpg').convert()
 # Change la taille des boutons pour
 win_bg = pygame.transform.scale(win_bg, (screen.get_width(), screen.get_height()))
 game_over_bg = pygame.transform.scale(game_over_bg, (screen.get_width(), screen.get_height()))
@@ -132,7 +132,10 @@ while running:
             pygame.mixer.music.set_volume(0.01)
         
         # Refresh l'affichage
-        game.update(screen)
+        try:
+            game.update(screen)
+        except:
+            pass
 
         if game.avatar_set:
             # Conditions de victoire
@@ -254,7 +257,10 @@ while running:
                         # i = au nombre de joueurs, tous les joueurs ont un avatar
                         # Lancement du timer et création de la map
                         game.call_map_and_timer()
-                
+                        for obj in gc.get_objects():
+                            if isinstance(obj, Game):
+                                print(obj)
+                        print()
             # appliquer le backrgound et créer la game a chaque lancement de parti
             if button_2_rect.collidepoint(event.pos) or button_3_rect.collidepoint(event.pos) or button_4_rect.collidepoint(event.pos):
                 # Appliquer le background

@@ -261,4 +261,4 @@ class Game:
         screen.blit(player.image, player.status_position_list[0])
         # Affiche le nombre de bombes sur la map
         for index in range(1, len(player.all_bombs) + 1):
-            screen.blit(pygame.image.load("assets/bombs/bomb.png"), player.status_position_list[index])
+            screen.blit(pygame.image.load("assets/bombs/bomb.png").convert_alpha(), player.status_position_list[index])
