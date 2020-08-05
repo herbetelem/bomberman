@@ -85,4 +85,3 @@ class Projectile(pygame.sprite.Sprite):
                     # son mur qui casse
                     son = pygame.mixer.Sound("assets/sounds/break.ogg")
                     son.play()
-
