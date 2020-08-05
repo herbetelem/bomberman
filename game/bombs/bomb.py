@@ -22,8 +22,8 @@ class Bomb(pygame.sprite.Sprite):
         self.boom = set_timeout(self.explosion, 2)
         self.image = pygame.image.load("assets/bombs/bomb.png")
         self.rect = self.image.get_rect()
-        self.rect.x = player.rect.x
-        self.rect.y = player.rect.y
+        self.rect.x = player.rect.x + 9
+        self.rect.y = player.rect.y + 9
         # Créer les groups de projectiles
         self.all_projectiles_top = pygame.sprite.Group()
         self.all_projectiles_bot = pygame.sprite.Group()

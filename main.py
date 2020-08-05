@@ -401,5 +401,3 @@ while running:
                 if event.value[1] == 1:
                     for i in range(10):
                         game.players[0].moove("z")
-                        
-            
