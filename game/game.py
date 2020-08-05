@@ -73,7 +73,7 @@ class Game:
         # Générer les joueurs
         # Position joueurs
         #                P1            P2          P3         P4
-        player_x_y = [[55, 130], [1255, 630], [1255, 130], [55, 630]]
+        player_x_y = [[50, 125], [1250, 625], [1250, 125], [50, 625]]
         # Créer les joueurs
         for index in range(0, (self.nb_joueur)):
             # Génére un joueur en fonction du nombre de joueur

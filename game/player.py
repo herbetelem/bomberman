@@ -17,7 +17,7 @@ class Player(pygame.sprite.Sprite):
         # Image de base du joueur
         self.image = pygame.image.load("assets/favicon.png")
         self.image_win = pygame.image.load("assets/favicon.png")
-        self.image = pygame.transform.scale(self.image, (40, 40))
+        self.image = pygame.transform.scale(self.image, (50, 50))
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
