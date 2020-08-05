@@ -26,11 +26,11 @@ class Game:
         self.avatar_set = False
         # Choisis la police d'écriture
         self.game_font = pygame.font.SysFont('Bahnschrift', 30)
-
         # Créer le groupe de sprites
         self.rocks_breakable = pygame.sprite.Group()
         self.rocks_unbreakable = pygame.sprite.Group()
         self.all_grass = pygame.sprite.Group()
+        self.len_all_grass = len(self.all_grass)
         self.all_avatar = pygame.sprite.Group()
 
         # liste des coordonée et nom de chaque avatar du menu
@@ -126,11 +126,14 @@ class Game:
             self.timer -= self.clock.tick(60)
             # Créer l'objet de texte
             timer_text = self.game_font.render(str(round(self.timer / 1000)), True, (255, 255, 255))
-            # update rock
-            for rock in self.rocks_unbreakable:
-                screen.blit(rock.image, rock.rect)
-            for rock in self.rocks_breakable:
-                screen.blit(rock.image, rock.rect)
+            # Check if a block is destroyed and replaced by grass
+            if len(self.all_grass) != self.len_all_grass:
+                # update rock
+                for rock in self.rocks_unbreakable:
+                    screen.blit(rock.image, rock.rect)
+                for rock in self.rocks_breakable:
+                    screen.blit(rock.image, rock.rect)
+                self.len_all_grass = len(self.all_grass)
             # update grass
             for grass in self.all_grass:
                 screen.blit(grass.image, grass.rect)
