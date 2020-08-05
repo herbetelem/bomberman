@@ -33,10 +33,6 @@ class Game:
         self.all_grass = pygame.sprite.Group()
         self.all_avatar = pygame.sprite.Group()
 
-        # appel des fonctions qui créeront la map et les joueurs
-        # self.create_player()
-        # self.create_map()
-
         # liste des coordonée et nom de chaque avatar du menu
         #                             alex                 alexandre              aurelia                  hadrien                 laura                melanie              guillaume                   wilfried
         self.avatar_menu_axe = [[230, 120, "alex"], [630, 120, "alexandre"], [1030, 120, "aurelia"], [230, 350, "hadrien"], [630, 350, "laura"], [1030, 350, "melanie"], [230, 560, "guillaume"], [630, 560, "wilfried"], [1030, 560, "alex"]]

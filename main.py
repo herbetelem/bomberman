@@ -244,7 +244,7 @@ while running:
                             # Change l'image de l'avatar quand il win
                             game.players[i].image_win = avatar.image_win
                             # Change la taille de l'avatar
-                            game.players[i].image = pygame.transform.scale(game.players[i].image, (40, 40))
+                            game.players[i].image = pygame.transform.scale(game.players[i].image, (50, 50))
                             # Ajoute le sprite au groupe de sprites des joueurs
                             game.all_players.add(game.players[i])
                             # Incrémente i
