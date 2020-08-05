@@ -33,11 +33,11 @@ class Player(pygame.sprite.Sprite):
         if sprite_ghost == 1:
             # J1
             # Positions de l'avatar et des bombes du statut
-            self.status_position_list = [(15, 15), (65, 20), (105, 20), (145, 20)]
+            self.status_position_list = [(10, 15), (65, 20), (105, 20), (145, 20)]
         elif sprite_ghost == 2:
             # J2
             # Positions de l'avatar et des bombes du statut
-            self.status_position_list = [(340, 15), (390, 20), (430, 20), (470, 20)]
+            self.status_position_list = [(325, 15), (390, 20), (430, 20), (470, 20)]
         try:
             # Evite les erreurs quand il n'y a que 2 joueurs
             if sprite_ghost == 3:
