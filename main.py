@@ -1,5 +1,5 @@
 # coding: utf-8
-
+import gc
 # IMPORT
 from math import ceil
 import random
@@ -255,11 +255,20 @@ while running:
                             game.avatar_menu_update(screen, i)
                     if i == nb_joueur:
                         #  i = au nombre de joueurs, tous les joueurs ont un avatar
+                        # obj_memory = gc.get_objects()
+                        # for obj in obj_memory:
+                        #     if isinstance(obj, Game):
+                        #         print(obj)
+                        # print()
                         # Lancement du timer et création de la map
                         game.call_map_and_timer()
 
             # appliquer le backrgound et créer la game a chaque lancement de parti
             if button_2_rect.collidepoint(event.pos) or button_3_rect.collidepoint(event.pos) or button_4_rect.collidepoint(event.pos):
+                # try:
+                #     del game
+                # except:
+                #     print("Didn't delete the game")
                 # Appliquer le background
                 screen.fill((56, 135, 0))
                 # Lance la partie avec le nombre de joueurs choisis
@@ -276,6 +285,8 @@ while running:
                 end_game_lost = False
                 music_win = False
                 music_lost = False
+                # Delete l'ancienne instance de Game
+                del game
 
         if game_status and game.avatar_set:
             # detecter si un joueur appuie sur une touche
