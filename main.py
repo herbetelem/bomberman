@@ -60,6 +60,9 @@ button_2_rect.y = ceil(screen.get_height() / 2.8)
 button_3_rect.y = ceil(screen.get_height() / 1.76)
 button_4_rect.y = ceil(screen.get_height() / 1.3)
 
+
+
+
 # créer les fond de victoire ou defaite
 win_bg = pygame.image.load('assets/bg/win_bg.jpg')
 game_over_bg = pygame.image.load('assets/bg/game_over_bg.jpg')
