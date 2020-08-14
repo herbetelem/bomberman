@@ -35,7 +35,7 @@ class Game:
 
         # liste des coordonée et nom de chaque avatar du menu
         #                             alex                 alexandre              aurelia                  hadrien                 laura                melanie              guillaume                   wilfried
-        self.avatar_menu_axe = [[230, 120, "alex"], [630, 120, "alexandre"], [1030, 120, "aurelia"], [230, 350, "hadrien"], [630, 350, "laura"], [1030, 350, "melanie"], [230, 560, "guillaume"], [630, 560, "wilfried"], [1030, 560, "alex"]]
+        self.avatar_menu_axe = [[230, 120, "alex"], [630, 120, "alexandre"], [1030, 120, "aurelia"], [230, 350, "hadrien"], [630, 350, "laura"], [1030, 350, "melanie"], [230, 560, "guillaume"], [630, 560, "wilfried"], [1030, 560, "xavier"]]
         for index in range(9):
             avatar_menu = Avatar_menu(self.avatar_menu_axe[index][0], self.avatar_menu_axe[index][1], self.avatar_menu_axe[index][2])
             self.all_avatar.add(avatar_menu)
